@@ -5,7 +5,7 @@ import pandas as pd
 import time
 
 # use your own developer key by signing up at https://developer.musixmatch.com/plans, then click username - dashboard - applications to find the key
-api_key = 'c186e81d35864c8dfcd1d19729aab4b5'
+api_key = '(your own key)'
 musixmatch = Musixmatch(api_key)
 
 # test codes

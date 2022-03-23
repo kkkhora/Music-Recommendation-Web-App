@@ -5,7 +5,7 @@ import pandas as pd
 import time
 
 # use your own developer key by signing up at https://developer.musixmatch.com/plans, then click username - dashboard - applications to find the key
-api_key = '(your own key)'
+api_key = '<your key>'
 musixmatch = Musixmatch(api_key)
 
 # test codes
@@ -42,15 +42,20 @@ musixmatch = Musixmatch(api_key)
 # data = request.json()
 # print(data)
 
+# api_call = 'https://api.musixmatch.com/ws/1.1/track.get?format=json&callback=callback&track_id=15953433'
+# request = requests.get(api_call)
+# data = request.json()
+# print(data)
 
-data = pd.read_csv("small-database.csv")
+#import corresponding csv table
+data = pd.read_csv("song_info1400.csv")
 songName_list = data['song name'].tolist()
 artist_list = data['artist name'].tolist()
 
 def get_data(songName_list, artist_list):
     
     # Create empty dataframe
-    track_features_list = ["song name", "genre", "artist name", "artist country", "lyrics snippet"]
+    track_features_list = ["song name", "genre", "artist name", "artist country"]
     track_df = pd.DataFrame(columns = track_features_list)
     i = 0
     while i < len(songName_list):
@@ -72,12 +77,7 @@ def get_data(songName_list, artist_list):
                 artistInfo = musixmatch.artist_get(artistID)
                 artist_country = artistInfo['message']['body']['artist']['artist_country']
             else:
-                artist_country = ''
-            if(trackInfo['message']['body']['track']['has_lyrics'] == 1):
-                lyricsInfo = musixmatch.track_lyrics_get(trackID)
-                lyrics = lyricsInfo["message"]["body"]["lyrics"]["lyrics_body"]
-            else:
-                lyrics = ''
+                artist_country = 'N/A'
 
         # Create empty dict
         track_features = {}
@@ -86,7 +86,6 @@ def get_data(songName_list, artist_list):
         track_features["genre"] = genre
         track_features["artist name"] = artist_list[i]
         track_features["artist country"] = artist_country
-        track_features["lyrics snippet"] = lyrics
         
             
         # Concat the dfs
@@ -104,5 +103,5 @@ def get_data(songName_list, artist_list):
 
 track_df = get_data(songName_list, artist_list)
 print("converting to csv...")
-track_df.to_csv("genre_country_lyrics.csv", mode='a', index = False)
+track_df.to_csv("countryANDgenre.csv", mode='a', index = False)
 print("csv successfully generated.")

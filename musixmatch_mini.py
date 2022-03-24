@@ -1,5 +1,3 @@
-import json
-import requests
 from musixmatch import Musixmatch
 import pandas as pd
 import time
@@ -13,8 +11,12 @@ musixmatch = Musixmatch(api_key)
 # # print(lyrics)
 # print(lyrics["message"]["body"]["lyrics"]["lyrics_body"])
 
-# trackInfo = musixmatch.matcher_track_get('Dearly Departed (feat. Esm‚àö¬© Patterson)', 'Shakey Graves')
+# trackInfo = musixmatch.matcher_track_get('Talk To Me (feat. Conor Maynard & RANI) - Sam Feldt Edit', 'M√∂we')
 # print(trackInfo)
+# if(trackInfo['message']['body'] == []):
+#     print('yes')
+# if(trackInfo['message']['body'] == ''):
+#     print('yes empty string')
 # if(trackInfo['message']['body'] == ''):
 #     print("no match")
 # trackID = trackInfo['message']['body']['track']['track_id']
@@ -47,8 +49,9 @@ musixmatch = Musixmatch(api_key)
 # data = request.json()
 # print(data)
 
-#import corresponding csv table
-data = pd.read_csv("song_info1400.csv")
+
+#import corresponding csv file
+data = pd.read_csv("song_info1401-2400.csv")
 songName_list = data['song name'].tolist()
 artist_list = data['artist name'].tolist()
 
@@ -62,7 +65,7 @@ def get_data(songName_list, artist_list):
         print("getting ", i, " row...")
         #get track
         trackInfo = musixmatch.matcher_track_get(songName_list[i], artist_list[i])
-        if(trackInfo['message']['body'] != ''):
+        if(trackInfo['message']['body'] != [] and trackInfo['message']['body'] != ''):
             trackID = trackInfo['message']['body']['track']['track_id']
 
             genre = ''
@@ -77,7 +80,10 @@ def get_data(songName_list, artist_list):
                 artistInfo = musixmatch.artist_get(artistID)
                 artist_country = artistInfo['message']['body']['artist']['artist_country']
             else:
-                artist_country = 'N/A'
+                artist_country = ''
+        else:
+            genre = ''
+            artist_country = ''
 
         # Create empty dict
         track_features = {}

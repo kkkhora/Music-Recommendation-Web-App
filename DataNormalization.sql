@@ -1,5 +1,7 @@
 USE Songs_artist;
 
+
+
 -- SONG_INFO
 -- Retrieve data from original tables
 DROP TABLE Song_info;
@@ -26,6 +28,8 @@ CREATE TABLE Song_info AS (
 -- Check parameters and sample data
 SELECT COUNT(*) FROM Song_info;
 SELECT * FROM Song_info LIMIT 100;
+
+
 
 -- ALBUM_INFO
 -- Retrieve data from original tables
@@ -55,6 +59,8 @@ SELECT COUNT(*) FROM Album_info_dedup;
 SELECT * FROM Album_info_dedup LIMIT 100;
 SELECT Album_id, COUNT(Album_id) AS Num_id FROM Album_info_dedup GROUP BY Album_id ORDER BY Num_id DESC;
 
+
+
 -- ARTIST_INFO
 -- Retrieve data from original tables
 DROP TABLE Artist_info;
@@ -83,3 +89,20 @@ INSERT INTO Artist_info_dedup
 SELECT COUNT(*) FROM Artist_info_dedup;
 SELECT * FROM Artist_info_dedup LIMIT 100;
 SELECT Artist_id, COUNT(Artist_id) AS Num_id FROM Artist_info_dedup GROUP BY Artist_id ORDER BY Num_id DESC;
+
+
+
+-- MASTER_TABLE
+-- Retrieve data from original tables
+DROP TABLE Master_table;
+CREATE TABLE Master_table AS (
+    SELECT
+        Song_ID,
+        Album_id,
+        Artist_id
+    FROM Artist_original
+);
+-- Check duplicate rows
+SELECT COUNT(*) FROM Master_table;
+SELECT * FROM Master_table LIMIT 100;
+SELECT Song_ID, COUNT(Song_ID) AS Num_id FROM Master_table GROUP BY Song_ID ORDER BY Num_id DESC;

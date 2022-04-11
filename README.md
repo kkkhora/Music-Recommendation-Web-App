@@ -10,6 +10,18 @@ This is a private repository for group project of CIS 550 in 2022 Spring.
 
 ## Dataset Description
 
+### RDS Instance Access
+
+*Endpoint*: aws-rds-mysql-1.cbfipmkivdxm.us-east-1.rds.amazonaws.com
+
+*Port*: 3306
+
+*Username*: admin
+
+*Password*: Group550-project
+
+### Dataset
+
 *Song_info.csv*
 
 | Attribute Name | Data Type | Description

@@ -12,13 +12,12 @@ This is a private repository for group project of CIS 550 in 2022 Spring.
 
 ### AWS RDS Instance Access
 
-*Endpoint*: aws-rds-mysql-1.cbfipmkivdxm.us-east-1.rds.amazonaws.com
-
-*Port*: 3306
-
-*Username*: admin
-
-*Password*: Group550-project
+```
+Endpoint: aws-rds-mysql-1.cbfipmkivdxm.us-east-1.rds.amazonaws.com
+Port: 3306
+Username: admin
+Password: Group550-project
+```
 
 ### Dataset Description
 
@@ -26,7 +25,9 @@ This is a private repository for group project of CIS 550 in 2022 Spring.
 
 Row number: 23899
 
-`SELECT COUNT(*) FROM Song_info;`
+```
+SELECT COUNT(*) FROM Song_info;
+```
 
 | Attribute Name | Data Type | Description
 | --- | --- | --- |
@@ -36,7 +37,9 @@ Row number: 23899
 
 Row number: 9072
 
-`SELECT COUNT(*) FROM Artist_info_dedup;`
+```
+SELECT COUNT(*) FROM Artist_info_dedup;
+```
 
 | Attribute Name | Data Type | Description
 | --- | --- | --- |
@@ -46,7 +49,9 @@ Row number: 9072
 
 Row number: 18719
 
-`SELECT COUNT(*) FROM Album_info_dedup;`
+```
+SELECT COUNT(*) FROM Album_info_dedup;
+```
 
 | Attribute Name | Data Type | Description
 | --- | --- | --- |

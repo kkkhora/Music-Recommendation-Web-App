@@ -22,7 +22,7 @@ Password: Group550-project
 
 ### Dataset Description
 
-#### Song_info
+#### Table: Song_info
 
 Row number: 23899
 
@@ -48,7 +48,7 @@ SELECT COUNT(*) FROM Song_info;
 | **Key_pitch** | *int* |  |
 | **H_s** | *varchar(1)* |  |
 
-#### Artist_info_dedup.csv
+#### Table: Artist_info_dedup
 
 Row number: 9072
 
@@ -64,7 +64,7 @@ SELECT COUNT(*) FROM Artist_info_dedup;
 | **Artist_image** | *varchar(100)* |  |
 | **Artist_country** | *varchar(4)* |  |
 
-#### Album_info_dedup.csv
+#### Table: Album_info_dedup
 
 Row number: 18719
 
@@ -79,7 +79,7 @@ SELECT COUNT(*) FROM Album_info_dedup;
 | **Album_year** | *int* |  |
 | **Track_image** | *varchar(100)* |  |
 
-#### Master_table
+#### Table: Master_table
 
 Row number: 23899
 

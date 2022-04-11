@@ -4,9 +4,10 @@ This is a private repository for group project of CIS 550 in 2022 Spring.
 
 ## File List and Description
 
-*DataImport.sql* is the SQL script for importing data to AWS-hosted RDS instance.
-
-*DataNormalization.sql* is the SQL script for normalizing data from orginal tables.
+| File Name | Description |
+| --- | --- |
+| *DataImport.sql* | SQL script for importing data to AWS-hosted RDS instance. |
+| *DataNormalization.sql* | SQL script for normalizing data from orginal tables. |
 
 ## Database and Dataset Description
 

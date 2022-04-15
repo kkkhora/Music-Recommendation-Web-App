@@ -1,0 +1,22 @@
+audio features explanation: https://developer.spotify.com/documentation/web-api/reference/#/operations/get-audio-features
+
+min_acousticness: 0.00000000  avg(Acousticness): 0.313878373108   max_acousticness: 0.99600000
+min_valence: 0.0000    avg(Valence): 0.45752142    max_valence: 0.9930
+min_danceability:0.0000    avg(danceability): 0.60610258    max_danceability: 0.9790
+min_energy:0.000769    avg(energy): 0.5948915189   max_energy: 0.999000
+min_instrumentalness:0.00000000   avg(instrumentalness): 0.098702948178  max_instrumentalness: 0.99400000
+min_livenss: 0.0141   avg(liveness): 0.17399231  max_livenss: 0.9890
+min_loudness: -43.274   avg(loudness): -8.2413758  max_loudness: 1.585
+min_speechiness:0.000000   avg(speechiness): 0.0935743085   max_speechiness: 0.959000
+min_tempo:0.000   avg(tempo): 119.6120718  max_tempo: 222.083
+min_duration(milliseconds):16483  max_duration: 3471000
+min_key: 0  max_key: 11
+
+
+acousticness, valence, Danceability, Energy, Instrumentalness, Tempo
+
+//H_s not specified
+http://localhost:8080/search/emotionRange?minAcousticness=0.2&maxAcousticness=0.9&minValence=0.4&maxValence=0.9&minDanceability=0.6&maxDanceability=0.9&minEnergy=0.5&maxEnergy=0.9&minInstrumentalness=0&maxInstrumentalness=0.9&minTempo=118&maxTempo=222&page=7
+
+//H_s specified
+http://localhost:8080/search/emotionRange?minAcousticness=0.2&maxAcousticness=0.9&minValence=0.4&maxValence=0.9&minDanceability=0.6&maxDanceability=0.9&minEnergy=0.5&maxEnergy=0.9&minInstrumentalness=0&maxInstrumentalness=0.9&minTempo=118&maxTempo=222&page=7&happysad=h

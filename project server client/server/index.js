@@ -22,15 +22,15 @@ app.get('/search/yearRange', routes.search_year_range)
 //scroll bar
 app.get('/search/emotionRange', routes.search_emotion_range)
 //search box (use LIKE %) search by name and artist
-app.get('/search/song')
-//sublist(use LIKE %)
-app.get('/search/genre')
+app.get('/search/song', routes.search_song)
+// sublist(use LIKE %)
+app.get('/search/genre', routes.search_genre)
 //display
-app.get('/userPlaylist')
-//display
-app.get('/userRec/features')//if no user data, random
-app.get('/userRec/country')//if no user data, random
-app,get('/userRec/year')//if no user data, random
+app.get('/userPlaylist', routes.playlist)
+//display recommendation page
+app.get('/userRec/features', routes.userRec_features)//if no user data, random(see below)
+app.get('/userRec/year', routes.userRec_year)//if no user data, random(see below)
+app.get('/userRec/random', routes.userRec_random)
 
 
 

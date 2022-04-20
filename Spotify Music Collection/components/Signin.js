@@ -1,17 +1,27 @@
 import Link from 'next/link';
+import { useRef } from 'react';
+
+
 
 const Signin = () => {
+
+    const formRef = useRef();
+
+    const  signInInfo=(event)=> {
+        console.log('event',event)
+    }
+
     return (
         <div className="account-wrapper">
             <h3 className="title">Sign In</h3>
             <div className="account-form">
                 <div className="form-floating mb-3">
-                    <input type="email" className="form-control" id="floatingInput"
+                    <input ref={formRef} type="text" className="form-control" id="floatingInput"
                         placeholder="User ID" />
                     <label>User ID</label>
                 </div>
                 <div className="form-floating">
-                    <input type="password" className="form-control" id="floatingPassword"
+                    <input ref={formRef} type="password" className="form-control" id="floatingPassword"
                         placeholder="Password" />
                     <label>Password</label>
                 </div>
@@ -28,7 +38,7 @@ const Signin = () => {
                 </div> */}
                 <hr/>
                 <div className="form-group">
-                    <button className="d-block default-btn move-top"><span>Sign In</span></button>
+                    <button className="d-block default-btn move-top">Sign In</button>
                 </div>
             </div>
             <div className="account-bottom">

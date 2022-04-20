@@ -25,11 +25,15 @@ app.get('/search/emotionRange', routes.search_emotion_range)
 app.get('/search/song', routes.search_song)
 // sublist(use LIKE %)
 app.get('/search/genre', routes.search_genre)
+//user like a song
+app.get('/userLike/:user/:songID', routes.user_like)
+//user remove a like
+app.get('/removeLike/:user/:songID', routes.remove_like)
 //display
-app.get('/userPlaylist', routes.playlist)
+app.get('/userPlaylist/:user', routes.playlist)
 //display recommendation page
-app.get('/userRec/features', routes.userRec_features)//if no user data, random(see below)
-app.get('/userRec/year', routes.userRec_year)//if no user data, random(see below)
+app.get('/userRec/features/:user', routes.userRec_features)//if no user data, random(see below)
+app.get('/userRec/year/:user', routes.userRec_year)//if no user data, random(see below)
 app.get('/userRec/random', routes.userRec_random)
 
 

@@ -362,7 +362,7 @@ async function playlist(req, res){
         const offset = (req.query.page - 1) * pagesize
         connection.query(`SELECT D.Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
         FROM Display_results D JOIN User_likes U ON D.Song_ID = U.Song_ID
-        WHERE username = '%${req.query.user}%'
+        WHERE username = '%${req.params.user}%'
         LIMIT ${pagesize} OFFSET ${offset}`, function(error, results, field){
             if(error){
                 console.log(error)
@@ -374,7 +374,7 @@ async function playlist(req, res){
     }else{
         connection.query(`SELECT D.Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
         FROM Display_results D JOIN User_likes U ON D.Song_ID = U.Song_ID
-        WHERE username = '%${req.query.user}%'`, function(error, results, field){
+        WHERE username = '%${req.params.user}%'`, function(error, results, field){
             if(error){
                 console.log(error)
                 res.json({error: error})
@@ -390,7 +390,7 @@ async function userRec_features(req, res){
         connection.query(`WITH User_features AS
         （SELECT AVG(acousticness) AS avg_acoustic, AVG(valence) AS avg_valence, AVG(Danceability) AS avg_dance, AVG(Energy) AS avg_energy, AVG(Instrumentalness) AS avg_instrument, AVG(Tempo) AS avg_tempo
         FROM User_likes U JOIN Song_info S ON U.Song_ID = S.Song_ID
-        WHERE username = '%${req.query.user}%'）
+        WHERE username = '%${req.params.user}%'）
         SELECT D.Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
         FROM Display_results D JOIN Song_info S ON D.Song_ID = S.Song_ID, User_features U
         WHERE acousticness >= avg_acoustic - 0.1 AND acousticness <= avg_acoustic + 0.1 AND 
@@ -417,7 +417,7 @@ async function userRec_year(req, res){
     connection.query(`WITH User_year AS
     （SELECT Album_year, Count(Album_year) AS num
     FROM User_likes U JOIN Display_results D ON U.Song_ID = D.Song_ID
-    WHERE username = '%${req.query.user}%'
+    WHERE username = '%${req.params.user}%'
     GROUP BY Album_year
     ORDER BY num DESC
     LIMIT 1）
@@ -454,6 +454,34 @@ async function userRec_random(req, res){
     });
 }
 
+async function user_like(req, res){
+    connection.query(`
+    INSERT INTO User_likes(username, Song_ID)
+    VALUES("${req.params.user}", "${req.params.songID}")
+    `, function(error, results, field){
+        if(error){
+            console.log(error)
+            res.json({error: error})
+        }else{
+            res.json({status:"success"})
+        }
+    });
+}
+
+async function remove_like(req, res){
+    connection.query(`
+    DELETE FROM User_likes
+    WHERE username = "${req.params.user}" AND Song_ID = "${req.params.songID}"
+    `, function(error, results, field){
+        if(error){
+            console.log(error)
+            res.json({error: error})
+        }else{
+            res.json({status:"success"})
+        }
+    });
+}
+
 module.exports = {
     // registerResponse,
     // loginResponse,
@@ -466,5 +494,7 @@ module.exports = {
     playlist,
     userRec_features,
     userRec_year,
-    userRec_random
+    userRec_random,
+    user_like,
+    remove_like
 }

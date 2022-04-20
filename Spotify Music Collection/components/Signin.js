@@ -5,23 +5,28 @@ import { useRef } from 'react';
 
 const Signin = () => {
 
-    const formRef = useRef();
+    const formRef1 = useRef();
+    const formRef2 = useRef();
 
-    const  signInInfo=(event)=> {
-        console.log('event',event)
+    const  signInInfo=()=> {
+        console.log('formRef1',formRef1.current.value)
+        console.log('formRef2',formRef2.current.value)
     }
+    // const onChangeHandler=(e)=>{
+    //     console.log('data input',e)
+    // }
 
     return (
         <div className="account-wrapper">
             <h3 className="title">Sign In</h3>
             <div className="account-form">
                 <div className="form-floating mb-3">
-                    <input ref={formRef} type="text" className="form-control" id="floatingInput"
-                        placeholder="User ID" />
+                    <input ref={formRef1} type="text" className="form-control" id="floatingInput"
+                        placeholder="User ID"/>
                     <label>User ID</label>
                 </div>
                 <div className="form-floating">
-                    <input ref={formRef} type="password" className="form-control" id="floatingPassword"
+                    <input ref={formRef2} type="password" className="form-control" id="floatingPassword"
                         placeholder="Password" />
                     <label>Password</label>
                 </div>
@@ -38,7 +43,7 @@ const Signin = () => {
                 </div> */}
                 <hr/>
                 <div className="form-group">
-                    <button className="d-block default-btn move-top">Sign In</button>
+                    <button className="d-block default-btn move-top" onClick={signInInfo}>Sign In</button>
                 </div>
             </div>
             <div className="account-bottom">

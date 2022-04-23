@@ -537,6 +537,7 @@ module.exports = {
     playlist,
     userRec_features,
     userRec_year,
+    userRec_song,
     userRec_random,
     user_like,
     remove_like

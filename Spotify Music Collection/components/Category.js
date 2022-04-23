@@ -9,19 +9,11 @@ const Category = () => {
             <section className="catergory-section padding-top padding-bottom">
         <div className="container">
             <div className="section-header">
-                <h3 className="header-title">Browse By Catergory</h3>
-                <div className="header-content">
-                    <Link href="/exploretwo">
-                    <a
-                        className="default-btn style-2 small-btn move-right"><span>View All
-                            <i className="icofont-circled-right"></i></span>
-                    </a>
-                    </Link> 
-                            
-                    </div>
+                <h3 className="header-title">Browse By Song Genre</h3>
+                
             </div>
             <div className="category-wrapper">
-                <div className="row row-cols-2 row-cols-md-4 row-cols-xl-auto g-3">
+                <div className="row row-cols-10 row-cols-md-5 row-cols-xl-auto g-2">
                     {
                         CategoryGetList.map((item) =>(
                             <div className="col" key={item.id}>

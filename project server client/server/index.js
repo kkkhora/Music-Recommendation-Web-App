@@ -32,6 +32,7 @@ app.get('/removeLike/:user/:songID', routes.remove_like)
 //display
 app.get('/userPlaylist/:user', routes.playlist)
 //display recommendation page
+app.get('/userRec/song', routes.userRec_song)//if no user data, random
 app.get('/userRec/features/:user', routes.userRec_features)//if no user data, random(see below)
 app.get('/userRec/year/:user', routes.userRec_year)//if no user data, random(see below)
 app.get('/userRec/random', routes.userRec_random)

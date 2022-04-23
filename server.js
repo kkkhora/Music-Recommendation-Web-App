@@ -11,30 +11,26 @@ const app = express();
 // whitelist localhost 3000
 app.use(cors({ credentials: true, origin: ['http://localhost:3000'] }));
 
-// Route 1 - register as GET 
-app.get('/hello', routes.hello)
-
-// Route 2 - register as GET 
-app.get('/jersey/:choice', routes.jersey)
-
-// Route 3 - register as GET 
-app.get('/matches/:league', routes.all_matches)
-
-// Route 4 - register as GET 
-app.get('/players', routes.all_players)
-
-// Route 5 - register as GET 
-app.get('/match', routes.match)
-
-// Route 6 - register as GET 
-app.get('/player', routes.player)
-
-// Route 7 - register as GET 
-app.get('/search/matches', routes.search_matches)
-
-// Route 8 - register as GET 
-app.get('/search/players', routes.search_players)
-
+//SIGN IN
+// app.post('/register', routes.registerResponse);
+// app.post('/login', routes.loginResponse);
+//interactive map
+app.get('/search/country', routes.search_country)
+app.get('/search/year', routes.search_year)
+//scroll bar
+app.get('/search/yearRange', routes.search_year_range)
+//scroll bar
+app.get('/search/emotionRange', routes.search_emotion_range)
+//search box (use LIKE %) search by name and artist
+app.get('/search/song',routes.search_song)
+//sublist(use LIKE %)
+app.get('/search/genre',routes.search_genre)
+//display
+app.get('/userPlaylist',routes.playlist)
+//display
+app.get('/userRec/features',routes.userRec_features)//if no user data, random
+app.get('/userRec/country',routes.userRec_year)//if no user data, random
+//app,get('/userRec/year',routes.userRec_random)//if no user data, random
 
 
 

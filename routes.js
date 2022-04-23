@@ -1,6 +1,7 @@
 const config = require('./config.json')
 const mysql = require('mysql');
 const e = require('express');
+const { query } = require('express');
 
 // TODO: fill in your connection details here
 const connection = mysql.createConnection({
@@ -14,70 +15,101 @@ connection.connect();
 
 
 // ********************************************
-//            SIMPLE ROUTE EXAMPLE
+//               LOGIN ROUTES
 // ********************************************
 
-// Route 1 (handler)
-async function hello(req, res) {
-    // a GET request to /hello?name=Steve
-    if (req.query.name) {
-        res.send(`Hello, ${req.query.name}! Welcome to the FIFA server!`)
-    } else {
-        res.send(`Hello! Welcome to the FIFA server!`)
-    }
+async function Search_length(sql) {
+
+    let num = await new Promise(r => {
+        connection.query(sql, function (error, results,) {
+            if (results) {
+                r(results)
+            }
+        })
+    })
+
+    let length = num.length
+    console.log('length',length);
+    return length
 }
 
+async function registerResponse(req, res) {
+    var username = req.body.username;
+    var email = req.body.email;
+    var password = req.body.password;
+    var check = 'select password from Users where username = "' + username + '"';
+    var register = "insert into Users (username, email, password) values (\"" + username + "\",\"" + email + "\",\"" + password + "\");";
+    connection.query(check, function (err, result) {
+        var message = JSON.stringify(result);
+        if (message.length == 2) {
+            connection.query(register, function (err) {
+                if (err) console.log("Insert error: ", err);
+                else {
+                    res.json({
+                        name: username,
+                        status: 'success'
+                    });
+                }
+            });
+        } else {
+            res.json({
+                status: 'fail'
+            });
+            console.log("The user already exist!");
+        }
+    });
+};
 
-// ********************************************
-//                  WARM UP 
-// ********************************************
+async function loginResponse(req, res) {
+    var username = req.body.username;
+    var password = req.body.password;
+    var check = 'select password from Users where username = "' + username + '"';
+    connection.query(check, function (err, result) {
+        var message = JSON.stringify(result);
+        if (message.length == 2) {
+            res.json({
+                status: 'unexist'
+            });
+        } else {
+            message = JSON.parse(message);
+            if (err) {
+                res.json({
+                    status: 'error'
+                });
+            }
+            if (message[0].password == password) {
+                res.json({
+                    name: username,
+                    status: 'success'
+                });
+            } else {
+                res.json({
+                    status: 'fail'
+                });
+            }
+        }
+    });
+};
 
-// Route 2 (handler)
-async function jersey(req, res) {
-    const colors = ['red', 'blue', 'white']
-    const jersey_number = Math.floor(Math.random() * 20) + 1
-    const name = req.query.name ? req.query.name : "player"
-
-    if (req.params.choice === 'number') {
-        // TODO: TASK 1: inspect for issues and correct 
-        res.json({ message: `Hello, ${name}!`, lucky_number: jersey_number })
-    } else if (req.params.choice === 'color') {
-        var lucky_color_index = Math.floor(Math.random() * 2) + 1;
-        // TODO: TASK 2: change this or any variables above to return only 'red' or 'blue' at random (go Quakers!)
-        res.json({ message: `Hello, ${name}!`, jersey_color: colors[lucky_color_index] })
-    } else {
-        // TODO: TASK 3: inspect for issues and correct
-        res.json({ message: `Hello,${name}, we like your jersey!` })
-    }
-}
-
-// ********************************************
-//               GENERAL ROUTES
-// ********************************************
-
-
-// Route 3 (handler)
-async function all_matches(req, res) {
-    // TODO: TASK 4: implement and test, potentially writing your own (ungraded) tests
-    // We have partially implemented this function for you to 
-    // parse in the league encoding - this is how you would use the ternary operator to set a variable to a default value
-    // we didn't specify this default value for league, and you could change it if you want! 
-    // in reality, league will never be undefined since URLs will need to match matches/:league for the request to be routed here... 
-    const league = req.params.league ? req.params.league : 'D1'
-    // use this league encoding in your query to furnish the correct results
-
+async function search_country(req, res) {
     if (req.query.page && !isNaN(req.query.page)) {
-        // This is the case where page is defined.
-        // The SQL schema has the attribute OverallRating, but modify it to match spec! 
-        // TODO: query and return results here:
-   
+        const pagesize = req.query.pagesize ? req.query.pagesize : 10
+        const offset = (req.query.page - 1) * pagesize
+        connection.query(`SELECT D.Song_ID, Song_name, D.Artist_name, Album_year, Song_genre, Track_image
+        FROM Display_results D JOIN Artist_info_dedup Aid on D.Artist_id = Aid.Artist_id
+        WHERE Artist_country = '${req.query.countryCode}'
+        LIMIT ${pagesize} OFFSET ${offset}`, function (error, results, field) {
+            if (error) {
+                console.log(error)
+                res.json({ error: error })
+            } else if (results) {
+                res.json({ results: results })
+            }
+        });
     } else {
-        // we have implemented this for you to see how to return results by querying the database
-        connection.query(`SELECT MatchId, Date, Time, HomeTeam AS Home, AwayTeam AS Away, FullTimeGoalsH AS HomeGoals, FullTimeGoalsA AS AwayGoals  
-        FROM Matches 
-        WHERE Division = '${league}'
-        ORDER BY HomeTeam, AwayTeam`, function (error, results, fields) {
-
+        connection.query(`SELECT D.Song_ID, Song_name, D.Artist_name, Album_year, Song_genre, Track_image
+        FROM Display_results D JOIN Artist_info_dedup Aid on D.Artist_id = Aid.Artist_id
+        WHERE Artist_country = '${req.query.countryCode}'`, function (error, results, field) {
             if (error) {
                 console.log(error)
                 res.json({ error: error })
@@ -88,65 +120,415 @@ async function all_matches(req, res) {
     }
 }
 
-// Route 4 (handler)
-async function all_players(req, res) {
-    // TODO: TASK 5: implement and test, potentially writing your own (ungraded) tests
-    
 
-    return res.json({error: "Not implemented"})
+async function search_year(req, res) {
+    if (req.query.page && !isNaN(req.query.page)) {
+        const pagesize = req.query.pagesize ? req.query.pagesize : 10
+        const offset = (req.query.page - 1) * pagesize
+
+        let count = await Search_length(`SELECT Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
+        FROM Display_results
+        WHERE Album_year = '${req.query.year}'`)
+
+        connection.query(`SELECT Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
+        FROM Display_results
+        WHERE Album_year = '${req.query.year}'
+        LIMIT ${pagesize} OFFSET ${offset}`, function (error, results, field) {
+            if (error) {
+                console.log(error)
+                res.json({ error: error })
+            } else if (results) {
+                res.json({ results: results,count })
+            }
+        });
+    } else {
+        connection.query(`SELECT Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
+        FROM Display_results
+        WHERE Album_year = '${req.query.year}'`, function (error, results, field) {
+            if (error) {
+                console.log(error)
+                res.json({ error: error })
+            } else if (results) {
+                res.json({ results: results })
+            }
+        });
+    }
 }
 
 
-// ********************************************
-//             MATCH-SPECIFIC ROUTES
-// ********************************************
+async function search_year_range(req, res) {
+    if (req.query.page && !isNaN(req.query.page)) {
+        const pagesize = req.query.pagesize ? req.query.pagesize : 10
+        const offset = (req.query.page - 1) * pagesize
 
-// Route 5 (handler)
-async function match(req, res) {
-    // TODO: TASK 6: implement and test, potentially writing your own (ungraded) tests
-    return res.json({error: "Not implemented"})
+        let count = await Search_length(`SELECT Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
+        FROM Display_results
+        WHERE Album_year >= '${req.query.startYear}' AND Album_year <= '${req.query.endYear}'`)
+        
+        connection.query(`SELECT Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
+        FROM Display_results
+        WHERE Album_year >= '${req.query.startYear}' AND Album_year <= '${req.query.endYear}'
+        LIMIT ${pagesize} OFFSET ${offset}`, function (error, results, field) {
+            if (error) {
+                console.log(error)
+                res.json({ error: error })
+            } else if (results) {
+                res.json({ results: results,count })
+            }
+        });
+    } else {
+        connection.query(`SELECT Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
+        FROM Display_results
+        WHERE Album_year >= '${req.query.startYear}' AND Album_year <= '${req.query.endYear}'`, function (error, results, field) {
+            if (error) {
+                console.log(error)
+                res.json({ error: error })
+            } else if (results) {
+                res.json({ results: results })
+            }
+        });
+    }
 }
 
-// ********************************************
-//            PLAYER-SPECIFIC ROUTES
-// ********************************************
 
-// Route 6 (handler)
-async function player(req, res) {
-    // TODO: TASK 7: implement and test, potentially writing your own (ungraded) tests
-    return res.json({error: "Not implemented"})
+async function search_emotion_range(req, res) {
+    if (req.query.happysad && !isNaN(req.query.happysad)) {
+        if (req.query.page && !isNaN(req.query.page)) {
+
+            const pagesize = req.query.pagesize ? req.query.pagesize : 10
+            const offset = (req.query.page - 1) * pagesize
+            let count = await Search_length(`SELECT D.Song_ID, D.Song_name, Artist_name, Album_year, D.Song_genre, Track_image
+            FROM Display_results D JOIN Song_info S ON D.Song_ID = S.Song_ID
+            WHERE Acousticness >= '${req.query.minAcousticness}' AND Acousticness <= '${req.query.maxAcousticness}'
+            AND Valence >= '${req.query.minValence}' AND Valence <= '${req.query.maxValence}'
+            AND Danceability >= '${req.query.minDanceability}' AND Danceability <= '${req.query.maxDanceability}'
+            AND Energy >= '${req.query.minEnergy}' AND Energy <= '${req.query.maxEnergy}'
+            AND Instrumentalness >= '${req.query.minInstrumentalness}' AND Instrumentalness <= '${req.query.maxInstrumentalness}'
+            AND Tempo >= '${req.query.minTempo}' AND Tempo <= '${req.query.maxTempo}'
+            AND H_s = '${req.query.happysad}'`)
+            connection.query(`SELECT D.Song_ID, D.Song_name, Artist_name, Album_year, D.Song_genre, Track_image
+            FROM Display_results D JOIN Song_info S ON D.Song_ID = S.Song_ID
+            WHERE Acousticness >= '${req.query.minAcousticness}' AND Acousticness <= '${req.query.maxAcousticness}'
+            AND Valence >= '${req.query.minValence}' AND Valence <= '${req.query.maxValence}'
+            AND Danceability >= '${req.query.minDanceability}' AND Danceability <= '${req.query.maxDanceability}'
+            AND Energy >= '${req.query.minEnergy}' AND Energy <= '${req.query.maxEnergy}'
+            AND Instrumentalness >= '${req.query.minInstrumentalness}' AND Instrumentalness <= '${req.query.maxInstrumentalness}'
+            AND Tempo >= '${req.query.minTempo}' AND Tempo <= '${req.query.maxTempo}'
+            AND H_s = '${req.query.happysad}'
+            LIMIT ${pagesize} OFFSET ${offset}`, function (error, results, field) {
+                if (error) {
+                    console.log(error)
+                    res.json({ error: error })
+                } else if (results) {
+                    res.json({ results: results,count })
+                }
+            });
+        } else {
+            connection.query(`SELECT D.Song_ID, D.Song_name, Artist_name, Album_year, D.Song_genre, Track_image
+            FROM Display_results D JOIN Song_info S ON D.Song_ID = S.Song_ID
+            WHERE Acousticness >= '${req.query.minAcousticness}' AND Acousticness <= '${req.query.maxAcousticness}'
+            AND Valence >= '${req.query.minValence}' AND Valence <= '${req.query.maxValence}'
+            AND Danceability >= '${req.query.minDanceability}' AND Danceability <= '${req.query.maxDanceability}'
+            AND Energy >= '${req.query.minEnergy}' AND Energy <= '${req.query.maxEnergy}'
+            AND Instrumentalness >= '${req.query.minInstrumentalness}' AND Instrumentalness <= '${req.query.maxInstrumentalness}'
+            AND Tempo >= '${req.query.minTempo}' AND Tempo <= '${req.query.maxTempo}'
+            AND H_s = '${req.query.happysad}'`, function (error, results, field) {
+                if (error) {
+                    console.log(error)
+                    res.json({ error: error })
+                } else if (results) {
+                    res.json({ results: results,count })
+                }
+            });
+        }
+    } else {
+        if (req.query.page && !isNaN(req.query.page)) {
+            
+            const pagesize = req.query.pagesize ? req.query.pagesize : 10
+            const offset = (req.query.page - 1) * pagesize
+            let count = await Search_length(`SELECT D.Song_ID, D.Song_name, Artist_name, Album_year, D.Song_genre, Track_image
+            FROM Display_results D JOIN Song_info S ON D.Song_ID = S.Song_ID
+            WHERE Acousticness >= '${req.query.minAcousticness}' AND Acousticness <= '${req.query.maxAcousticness}'
+            AND Valence >= '${req.query.minValence}' AND Valence <= '${req.query.maxValence}'
+            AND Danceability >= '${req.query.minDanceability}' AND Danceability <= '${req.query.maxDanceability}'
+            AND Energy >= '${req.query.minEnergy}' AND Energy <= '${req.query.maxEnergy}'
+            AND Instrumentalness >= '${req.query.minInstrumentalness}' AND Instrumentalness <= '${req.query.maxInstrumentalness}'
+            AND Tempo >= '${req.query.minTempo}' AND Tempo <= '${req.query.maxTempo}'`)
+
+            connection.query(`SELECT D.Song_ID, D.Song_name, Artist_name, Album_year, D.Song_genre, Track_image
+            FROM Display_results D JOIN Song_info S ON D.Song_ID = S.Song_ID
+            WHERE Acousticness >= '${req.query.minAcousticness}' AND Acousticness <= '${req.query.maxAcousticness}'
+            AND Valence >= '${req.query.minValence}' AND Valence <= '${req.query.maxValence}'
+            AND Danceability >= '${req.query.minDanceability}' AND Danceability <= '${req.query.maxDanceability}'
+            AND Energy >= '${req.query.minEnergy}' AND Energy <= '${req.query.maxEnergy}'
+            AND Instrumentalness >= '${req.query.minInstrumentalness}' AND Instrumentalness <= '${req.query.maxInstrumentalness}'
+            AND Tempo >= '${req.query.minTempo}' AND Tempo <= '${req.query.maxTempo}'
+            LIMIT ${pagesize} OFFSET ${offset}`, function (error, results, field) {
+                if (error) {
+                    console.log(error)
+                    res.json({ error: error })
+                } else if (results) {
+                    res.json({ results: results,count })
+                }
+            });
+        } else {
+            connection.query(`SELECT D.Song_ID, D.Song_name, Artist_name, Album_year, D.Song_genre, Track_image
+            FROM Display_results D JOIN Song_info S ON D.Song_ID = S.Song_ID
+            WHERE Acousticness >= '${req.query.minAcousticness}' AND Acousticness <= '${req.query.maxAcousticness}'
+            AND Valence >= '${req.query.minValence}' AND Valence <= '${req.query.maxValence}'
+            AND Danceability >= '${req.query.minDanceability}' AND Danceability <= '${req.query.maxDanceability}'
+            AND Energy >= '${req.query.minEnergy}' AND Energy <= '${req.query.maxEnergy}'
+            AND Instrumentalness >= '${req.query.minInstrumentalness}' AND Instrumentalness <= '${req.query.maxInstrumentalness}'
+            AND Tempo >= '${req.query.minTempo}' AND Tempo <= '${req.query.maxTempo}'`, function (error, results, field) {
+                if (error) {
+                    console.log(error)
+                    res.json({ error: error })
+                } else if (results) {
+                    res.json({ results: results })
+                }
+            });
+        }
+    }
 }
 
 
-// ********************************************
-//             SEARCH ROUTES
-// ********************************************
-
-// Route 7 (handler)
-async function search_matches(req, res) {
-    // TODO: TASK 8: implement and test, potentially writing your own (ungraded) tests
-    // IMPORTANT: in your SQL LIKE matching, use the %query% format to match the search query to substrings, not just the entire string
-
-    return res.json({error: "Not implemented"})
 
 
+async function search_song(req, res) {
+    if (req.query.page && !isNaN(req.query.page)) {
+        const pagesize = req.query.pagesize ? req.query.pagesize : 10
+        const offset = (req.query.page - 1) * pagesize
+
+
+        if (req.query.name && req.query.artist) {
+            let count = await Search_length(`SELECT Song_id, Song_name, Artist_name, Album_year, Song_genre, Track_image
+            FROM Display_results
+            WHERE Song_name LIKE '%${req.query.name}%' AND Artist_name LIKE '%${req.query.artist}%'`)
+            connection.query(`SELECT Song_id, Song_name, Artist_name, Album_year, Song_genre, Track_image
+            FROM Display_results
+            WHERE Song_name LIKE '%${req.query.name}%' AND Artist_name LIKE '%${req.query.artist}%'
+            LIMIT ${pagesize} OFFSET ${offset}`, function (error, results, field) {
+                if (error) {
+                    console.log(error)
+                    res.json({ error: error })
+                } else if (results) {
+                    res.json({ results: results,count })
+                }
+            });
+        } else if (req.query.name) {
+            let count = await Search_length(`SELECT Song_id, Song_name, Artist_name, Album_year, Song_genre, Track_image
+            FROM Display_results
+            WHERE Song_name LIKE '%${req.query.name}%'`)
+            connection.query(`SELECT Song_id, Song_name, Artist_name, Album_year, Song_genre, Track_image
+            FROM Display_results
+            WHERE Song_name LIKE '%${req.query.name}%'
+            LIMIT ${pagesize} OFFSET ${offset}`, function (error, results, field) {
+                if (error) {
+                    console.log(error)
+                    res.json({ error: error })
+                } else if (results) {
+                    res.json({ results: results ,count})
+                }
+            });
+        } else if (req.query.artist) {
+            let count =  await Search_length(`SELECT Song_id, Song_name, Artist_name, Album_year, Song_genre, Track_image
+            FROM Display_results
+            WHERE Artist_name LIKE '%${req.query.artist}%'`)
+            connection.query(`SELECT Song_id, Song_name, Artist_name, Album_year, Song_genre, Track_image
+            FROM Display_results
+            WHERE Artist_name LIKE '%${req.query.artist}%'
+            LIMIT ${pagesize} OFFSET ${offset}`, function (error, results, field) {
+                if (error) {
+                    console.log(error)
+                    res.json({ error: error })
+                } else if (results) {
+                    res.json({ results: results ,count})
+                }
+            });
+        }
+    } else {
+        if (req.query.name && req.query.artist) {
+            connection.query(`SELECT Song_id, Song_name, Artist_name, Album_year, Song_genre, Track_image
+            FROM Display_results
+            WHERE Song_name LIKE '%${req.query.name}%' AND Artist_name LIKE '%${req.query.artist}%'`, function (error, results, field) {
+                if (error) {
+                    console.log(error)
+                    res.json({ error: error })
+                } else if (results) {
+                    res.json({ results: results })
+                }
+            });
+        } else if (req.query.name) {
+            connection.query(`SELECT Song_id, Song_name, Artist_name, Album_year, Song_genre, Track_image
+            FROM Display_results
+            WHERE Song_name LIKE '%${req.query.name}%'`, function (error, results, field) {
+                if (error) {
+                    console.log(error)
+                    res.json({ error: error })
+                } else if (results) {
+                    res.json({ results: results })
+                }
+            });
+        } else if (req.query.artist) {
+            connection.query(`SELECT Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
+            FROM Display_results
+            WHERE Artist_name LIKE '%${req.query.artist}%'`, function (error, results, field) {
+                if (error) {
+                    console.log(error)
+                    res.json({ error: error })
+                } else if (results) {
+                    res.json({ results: results })
+                }
+            });
+        }
+    }
 }
 
-// Route 8 (handler)
-async function search_players(req, res) {
-    // TODO: TASK 9: implement and test, potentially writing your own (ungraded) tests
-    // IMPORTANT: in your SQL LIKE matching, use the %query% format to match the search query to substrings, not just the entire string
-    
-    return res.json({error: "Not implemented"})
+
+async function search_genre(req, res) {
+    if (req.query.page && !isNaN(req.query.page)) {
+        const pagesize = req.query.pagesize ? req.query.pagesize : 10
+        const offset = (req.query.page - 1) * pagesize
+
+        let count = await Search_length(`SELECT Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
+        FROM Display_results
+        WHERE Song_genre LIKE '%${req.query.genre}%'`)
+
+        connection.query(`SELECT Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
+        FROM Display_results
+        WHERE Song_genre LIKE '%${req.query.genre}%'
+        LIMIT ${pagesize} OFFSET ${offset}`, function (error, results, field) {
+            if (error) {
+                console.log(error)
+                res.json({ error: error })
+            } else if (results) {
+                res.json({ results: results, count})
+            }
+        });
+    } else {
+        connection.query(`SELECT Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
+        FROM Display_results
+        WHERE Song_genre LIKE '%${req.query.genre}%'`, function (error, results, field) {
+            if (error) {
+                console.log(error)
+                res.json({ error: error })
+            } else if (results) {
+                res.json({ results: results })
+            }
+        });
+    }
+}
+
+
+async function playlist(req, res) {
+    if (req.query.page && !isNaN(req.query.page)) {
+        const pagesize = req.query.pagesize ? req.query.pagesize : 10
+        const offset = (req.query.page - 1) * pagesize
+        connection.query(`SELECT D.Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
+        FROM Display_results D JOIN User_likes U ON D.Song_ID = U.Song_ID
+        WHERE username = '%${req.query.user}%'
+        LIMIT ${pagesize} OFFSET ${offset}`, function (error, results, field) {
+            if (error) {
+                console.log(error)
+                res.json({ error: error })
+            } else if (results) {
+                res.json({ results: results })
+            }
+        });
+    } else {
+        connection.query(`SELECT D.Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
+        FROM Display_results D JOIN User_likes U ON D.Song_ID = U.Song_ID
+        WHERE username = '%${req.query.user}%'`, function (error, results, field) {
+            if (error) {
+                console.log(error)
+                res.json({ error: error })
+            } else if (results) {
+                res.json({ results: results })
+            }
+        });
+    }
+}
+
+//frontend: if playlist is not null, use userRec_features and userRec_year; if playlist is null {[]}, use userRec_random.
+async function userRec_features(req, res) {
+    connection.query(`WITH User_features AS
+        （SELECT AVG(acousticness) AS avg_acoustic, AVG(valence) AS avg_valence, AVG(Danceability) AS avg_dance, AVG(Energy) AS avg_energy, AVG(Instrumentalness) AS avg_instrument, AVG(Tempo) AS avg_tempo
+        FROM User_likes U JOIN Song_info S ON U.Song_ID = S.Song_ID
+        WHERE username = '%${req.query.user}%'）
+        SELECT D.Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
+        FROM Display_results D JOIN Song_info S ON D.Song_ID = S.Song_ID, User_features U
+        WHERE acousticness >= avg_acoustic - 0.1 AND acousticness <= avg_acoustic + 0.1 AND 
+        valence >= avg_valence - 0.1 AND valence <= avg_valence + 0.1 AND
+        Danceability >= avg_dance - 0.1 AND Danceability <= avg_dance + 0.1 AND
+        Energy >= avg_energy - 0.1 AND Energy <= avg_energy + 0.1 AND
+        Instrumentalness >= avg_instrumental - 0.1 AND Instrumentalness <= avg_instrumental + 0.1 AND
+        Tempo >= avg_tempo - 0.1 AND Tempo <= avg_Tempo
+        AND D.Song_ID NOT IN (SELECT Song_ID FROM User_likes)
+        ORDER BY RAND()
+        LIMIT 5
+        `, function (error, results, field) {
+        if (error) {
+            console.log(error)
+            res.json({ error: error })
+        } else if (results) {
+            res.json({ results: results })
+        }
+    });
+}
+
+//frontend: if playlist is not null, use userRec_features and userRec_year; if playlist is null {[]}, use userRec_random.
+async function userRec_year(req, res) {
+    connection.query(`WITH User_year AS
+    （SELECT Album_year, Count(Album_year) AS num
+    FROM User_likes U JOIN Display_results D ON U.Song_ID = D.Song_ID
+    WHERE username = '%${req.query.user}%'
+    GROUP BY Album_year
+    ORDER BY num DESC
+    LIMIT 1）
+    SELECT D.Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
+    FROM Display_results D, User_year U
+    WHERE D.Album_year >= U.Album_year - 5 AND D.Album_year <= U.Album_year + 5
+    AND D.Song_ID NOT IN (SELECT Song_ID FROM User_likes)
+    ORDER BY RAND()
+    LIMIT 5
+    `, function (error, results, field) {
+        if (error) {
+            console.log(error)
+            res.json({ error: error })
+        } else if (results) {
+            res.json({ results: results })
+        }
+    });
+}
+
+//frontend: if playlist is not null, use userRec_features and userRec_year; if playlist is null {[]}, use userRec_random.
+async function userRec_random(req, res) {
+    connection.query(`
+    SELECT Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
+    FROM Display_results
+    ORDER BY RAND()
+    LIMIT 5
+    `, function (error, results, field) {
+        if (error) {
+            console.log(error)
+            res.json({ error: error })
+        } else if (results) {
+            res.json({ results: results })
+        }
+    });
 }
 
 module.exports = {
-    hello,
-    jersey,
-    all_matches,
-    all_players,
-    match,
-    player,
-    search_matches,
-    search_players
+    // registerResponse,
+    // loginResponse,
+    search_country,
+    search_year,
+    search_year_range,
+    search_emotion_range,
+    search_song,
+    search_genre,
+    playlist,
+    userRec_features,
+    userRec_year,
+    userRec_random
 }

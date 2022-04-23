@@ -411,6 +411,49 @@ async function userRec_features(req, res){
             }
         });
 }
+//recommend user's favorite category song which ranks top in user's playlist
+async function userRec_song(req, res){
+if(req.query.user && !isNaN(req.query.user)){
+    connection.query(`WITH User_most_like AS
+    (select label, count(1) as song_unit
+        FROM User_likes a inner join Song_Classifier b
+    on a.Song_ID = b.Song_ID
+        WHERE username = '%${req.params.user}%'
+        group by label
+        order by song_unit desc
+        limit 1)
+    select D.Song_ID, D.Song_name, Artist_name, Album_year, D.Song_genre, Track_image
+    FROM Display_results D inner join Song_Classifier SC on D.Song_ID = SC.Song_ID
+    where D.Song_ID not in (select Song_ID from User_likes)
+    and label in (select label from User_most_like)
+    ORDER BY RAND()
+    limit 10
+    `, function(error, results, field){
+        if(error){
+            console.log(error)
+            res.json({error: error})
+        }else if(results){
+            res.json({results:results})
+        }
+    });
+    }
+    else {
+        connection.query(`
+        SELECT Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
+        FROM Display_results
+        ORDER BY RAND()
+        LIMIT 10
+        `, function(error, results, field){
+            if(error){
+                console.log(error)
+                res.json({error: error})
+            }else if(results){
+                res.json({results:results})
+            }
+        });
+
+    }
+}
 
 //frontend: if playlist is not null, use userRec_features and userRec_year; if playlist is null {[]}, use userRec_random.
 async function userRec_year(req, res){

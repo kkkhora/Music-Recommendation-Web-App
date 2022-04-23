@@ -1,18 +1,17 @@
 import Head from 'next/head';
 import BannerTwo from '../components/BannerTwo';
+import Searchbygenre from '../components/Searchbygenre';
 import LiveAuction from '../components/LiveAuction';
-import TopCollectors from '../components/TopCollectors';
-import PopularCollection from '../components/PopularCollection';
-import LatestNews from '../components/LatestNews';
+import SearchbyYear from '../components/SearchbyYear';
+import SearchbyName from '../components/SearchbyName';
 
 const HomeTwo = () => {
   return (
     <div>
       <BannerTwo />
-      <PopularCollection />
-      <LiveAuction />
-      <TopCollectors />
-      <LatestNews />
+      <SearchbyName />
+      <SearchbyYear/>
+      <Searchbygenre/>
     </div>
   )
 }

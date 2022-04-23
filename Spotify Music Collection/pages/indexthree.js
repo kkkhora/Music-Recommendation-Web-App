@@ -1,22 +1,14 @@
+import Head from 'next/head';
 import BannerThree from '../components/BannerThree';
-import Category from '../components/Category';
-import LiveAuction from '../components/LiveAuction';
-import TopCollectors from '../components/TopCollectors';
-import TrendingNow from '../components/TrendingNow';
-import LatestNews from '../components/LatestNews';
+import SearchbyEmotion from '../components/SearchbyEmotion';
 
-
-const HomeThree = () => {
+const HomeTwo = () => {
   return (
     <div>
       <BannerThree />
-      <Category />
-      <LiveAuction />
-      <TopCollectors />
-      <TrendingNow />
-      <LatestNews />
+      <SearchbyEmotion/>
     </div>
   )
 }
 
-export default HomeThree
+export default HomeTwo

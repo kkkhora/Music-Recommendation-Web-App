@@ -19,16 +19,21 @@ const Banner = () => {
                                     And Sell Extraordinary NFTs </h2>
                                 <p>Digital Marketplace For Crypto Collectibles And Non-Fungible Tokens.</p>
                                 <div className="banner-btns d-flex flex-wrap justify-content-center">
-                                    <Link href="/explore">
-                                    <a className="default-btn move-top"><span>Explore
-                                            Now</span> 
+                                    <Link href="/404">
+                                    <a className="default-btn move-top"><span>Pick Songs By Song Info</span> 
+                                    </a>
+                                    </Link>
+
+                                    <Link href="/map">
+                                    <a className="default-btn move-top"><span>Pick Songs By Country</span>
                                     </a>
                                     </Link>
 
                                     <Link href="/signin">
-                                    <a className="default-btn style-2 move-right"><span>Create Store</span>
+                                    <a className="default-btn move-top"><span>Pick Songs By Emotional Tendency</span>
                                     </a>
                                     </Link>
+
                                 </div>
                             </div>
                         </div>

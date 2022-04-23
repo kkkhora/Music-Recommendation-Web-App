@@ -1,3 +1,4 @@
+
 @charset "UTF-8";
 /*!
 Template Name: Anftiz
@@ -2313,6 +2314,17 @@ aside {
   transition: top 0.5s ease;
   border-radius: 5px;
 }
+.name__search {
+  left: 0;
+  top: -71px;
+  height: 70px;
+  right: 40px;
+  background-color: #fff8e1;
+  z-index: 1;
+  padding: 0 15px;
+  transition: top 0.5s ease;
+  border-radius: 5px;
+}
 .header__search input {
   width: calc(100% - 30px);
   height: 50px;
@@ -2846,7 +2858,7 @@ aside {
   color: #ff3000;
 }
 .page-header-section.style-1 .page-header-content .page-header-inner .breadcrumb li a::before {
-  background: #b86948;
+  background: #ffee58;
   width: 8px;
   height: 1px;
   transform: translateY(-50%);
@@ -3325,6 +3337,11 @@ Home page css start here
 
 .gradient-text-orange {
   background: linear-gradient(315deg, #fb8c00 0%, #e53935 74%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.gradient-text-yello {
+  background: linear-gradient(315deg, #2196f3 0%, #fff176 74%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -4515,7 +4532,7 @@ Home page css start here
   background-color: #261011;
   padding: 30px 25px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
+  border-radius: px;
 }
 @media (min-width: 768px) {
   .error-section .section-wrapper .error-item {
@@ -4531,6 +4548,7 @@ Home page css start here
 .rank-table {
   vertical-align: middle;
   text-align: center;
+  /* table-layout: fixed, */
 }
 .rank-table thead {
   background-color: #ff3000;
@@ -4545,6 +4563,7 @@ Home page css start here
 }
 .rank-table td {
   font-weight: 600;
+  /* width: 100px; */
   color: #ebf0ff;
 }
 
@@ -5198,5 +5217,14 @@ Home page css start here
 .footer-section.style-2 .footer-bottom a:hover {
   color: #ff3000;
 }
+
+.ant-pagination-item,.ant-pagination-item-link{
+  background-color: #b86948;
+  color:#fff;
+  font-weight: 700;
+}
+
+
+
 
 /*# sourceMappingURL=style.css.map */

@@ -13,11 +13,8 @@
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.6.2",
     "@mui/material": "^5.6.2",
-<<<<<<< HEAD
-=======
     "antd": "^4.19.5",
     "axios": "^0.26.1",
->>>>>>> 2790dd6be12be7d3fe3896bcbbb6ec1de18d19a9
     "bootstrap": "^5.0.1",
     "next": "^12.1.0",
     "react": "^17.0.2",

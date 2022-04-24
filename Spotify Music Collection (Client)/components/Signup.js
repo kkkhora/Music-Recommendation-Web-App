@@ -4,7 +4,6 @@ import { useRef } from 'react';
 
 const Signup = () => {
 
-    //add variables to store user input
     const username = useRef();
     const password = useRef();
     const confirmPassword = useRef();
@@ -20,7 +19,6 @@ const Signup = () => {
         console.log("username", username.current.value)
         console.log("password", password.current.value)
         console.log("confirmPassword", confirmPassword.current.value)
-
     }
 
     return (

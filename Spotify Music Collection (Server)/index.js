@@ -1,5 +1,6 @@
 const express = require('express');
-const mysql      = require('mysql');
+const mysql = require('mysql');
+// const express = require('express');
 var cors = require('cors')
 
 
@@ -10,6 +11,7 @@ const app = express();
 
 // whitelist localhost 3000
 app.use(cors({ credentials: true, origin: ['http://localhost:3000'] }));
+app.use(express.json());
 
 //SIGN IN
 // app.post('/register', routes.registerResponse);

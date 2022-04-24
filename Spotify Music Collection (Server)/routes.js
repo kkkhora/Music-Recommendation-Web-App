@@ -1,9 +1,9 @@
 const config = require('./config.json')
 const mysql = require('mysql');
-const e = require('express');
+// const express = require('express');
 const { query } = require('express');
+// const app = express();
 
-// TODO: fill in your connection details here
 const connection = mysql.createConnection({
     host: config.rds_host,
     user: config.rds_user,
@@ -12,6 +12,24 @@ const connection = mysql.createConnection({
     database: config.rds_db
 });
 connection.connect();
+
+// app.use(express.json());
+
+// app.post('/register', (req, res) => {
+
+//     const username = req.body.username
+//     const password = req.body.password
+
+//     connection.query("INSERT INTO Users (username, password) VALUES (?, ?)", 
+//     [username, password], 
+//     (err, result) => {
+//         console.log(err);
+//     })
+// })
+
+// app.listen(3001, () => {
+//     console.log("running server");
+// })
 
 
 // ********************************************

@@ -1,24 +1,14 @@
-// import PageHeader from '../components/PageHaeder';
-import React from 'react';
-// import {
-//     Table,
-//     Pagination,
-//     Select,
-//     Row,
-//     Col,
-//     Divider,
-//     Slider,
-//     Rate 
-// } from 'antd'
+import React, {useState} from 'react';
 import {withRouter} from 'next/router';
 import Link from "next/link";
-// import { getSearchCountry } from '../fetcher'
-const PageHeaderText =
-{
-    "linkText":"Home",
-    "heading":"NFT Ranking"
-};
+import ReactPaginate from 'react-paginate';
 
+// import { getSearchCountry } from '../fetcher'
+
+
+// const handlePageClick = (data) =>{
+//   console.log(data)
+// }
 
 class country extends React.Component {
 
@@ -32,25 +22,21 @@ class country extends React.Component {
       };
       
       // console.log(props.router.query)
-      this.countryCodeOnChange = this.countryCodeOnChange.bind(this);
-      this.pageOnChange = this.pageOnChange.bind(this)
+      // this.countryCodeOnChange = this.countryCodeOnChange.bind(this);
+      this.pageOnChange = this.changePage.bind(this)
     }
-  
-    // countryOnChange(value) {
-    //   // TASK 2: this value should be used as a parameter to call getAllMatches in fetcher.js with the parameters page and pageSize set to null
-    //   // then, matchesResults in state should be set to the results returned - see a similar function call in componentDidMount()
-    //   getAllMatches(null, null, value).then(res => {
-    //     this.setState({matchesResults: res.results})
-    //   })
-    // }
   
     componentDidMount() {
       this.getSearchCountry();
-      console.log(this.state.countryResults)
-    }
+    };
   
+    changePage = ({selected}) => {
+        this.setState({page: selected + 1})
+        console.log(selected)
+    };
+
     getSearchCountry(){
-      fetch(`http://localhost:8080/search/country?countryCode=${this.state.countryCode}&page=${this.state.page}`, {
+      fetch(`http://localhost:8080/search/country?countryCode=${this.state.countryCode}`, {
         method: "GET",
       }).then(res=> {
         return res.json();
@@ -61,17 +47,12 @@ class country extends React.Component {
       }).catch((err)=>console.log(err));
     };
 
-    countryCodeOnChange(e){
-      this.setState({
-        countryCode: e.target.value,
-      });
-    }
-
-    pageOnChange(e){
-      this.setState({
-        page: e.target.value,
-      });
-    }
+    // countryCodeOnChange(e){
+    //   this.setState({
+    //     countryCode: e.target.value,
+    //   });
+    // }
+    
 
     render() {
   
@@ -91,6 +72,11 @@ class country extends React.Component {
                     <a>Home</a>
                     </Link> 
                     </li>
+                    <li>
+                    <Link href="/map">
+                    <a>Map</a>
+                    </Link> 
+                    </li>
                     <li className="active">Song Display</li>
                     </div> 
                 </div>
@@ -101,23 +87,24 @@ class country extends React.Component {
         <div className="container">
             <div className="section-header">
                 <div className="nft-filter d-flex flex-wrap align-items-center justify-content-center  gap-15">
-                    <h3>Search Song by Country</h3>
+                    <h3>Search Songs by Country</h3>
                 </div>
             </div>
             <div className="ranking-wrapper table-responsive">
                 <table className="table table-hover rank-table">
                     <thead>
                         <tr>
-                            <th scope="col">track id</th>
+                            <th scope="col">Item Number</th>
                             <th scope="col">Song Name</th>
                             <th scope="col">Artist</th>
                             <th scope="col">Release Year </th>
                             <th scope="col">Genre </th>
+                            <th scope="col">Listen on Spotify</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            this.state.countryResults.map((item, i=1) =>(
+                            this.state.countryResults.slice((this.state.page - 1)*10, (this.state.page - 1)*10 + 10).map((item, i=1) =>(
                                 <tr key={item.song_ID}>
                                     <th scope="row" className="rank-sl">{i+1}</th>
                                     <td className="rank-collection">
@@ -146,13 +133,26 @@ class country extends React.Component {
                                     </td>
                                     <td className="rank-owner">{`${item.Album_year}`}</td>
                                     <td className="rank-assets">{`${item.Song_genre}`}</td>
+                                    <td className="rank-assets">
+                                                <a target='_blank' href={`https://open.spotify.com/track/${item.Song_ID.split(':')[item.Song_ID.split(':').length - 1]}`}>
+                                                    <img src="http://localhost:3000/assets/images/logo/spotify_logo3.png" alt="Spotify Logo" />
+                                                </a></td>
                                 </tr>
                             ))
                         }
-                        
-                        
                     </tbody>
                 </table>
+              <ReactPaginate 
+              previousLabel={"<<"} 
+              nextLabel={">>"} 
+              pageCount={Math.ceil(this.state.countryResults.length / 10)} 
+              onPageChange={this.pageOnChange}
+              containerClassName={"paginationBttns"}
+              previousLinkClassName={"previousBttn"}
+              nextLinkClassName={"nextBttn"}
+              disabledClassName={"paginationDisabled"}
+              activeClassName={"paginationActive"}
+              />
             </div>
         </div>
     </section>

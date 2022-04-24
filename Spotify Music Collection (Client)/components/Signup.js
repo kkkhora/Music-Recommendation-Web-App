@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Axios from 'axios';
 import { useRef } from 'react';
-import { response } from '../../Spotify Music Collection (Server)';
+// import { response } from '../../Spotify Music Collection (Server)';
 
 const Signup = () => {
 

@@ -9,11 +9,6 @@ const config = require('./config.json')
 
 const app = express();
 
-<<<<<<< HEAD
-// const db = 
-
-=======
->>>>>>> parent of 1a8896c (Update singup module)
 // whitelist localhost 3000
 app.use(cors({ credentials: true, origin: ['http://localhost:3000'] }));
 app.use(express.json());

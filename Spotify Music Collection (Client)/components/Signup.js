@@ -1,5 +1,4 @@
 import Link from 'next/link';
-<<<<<<< HEAD
 import Axios from 'axios';
 import { useRef } from 'react';
 import { response } from '../../Spotify Music Collection (Server)';
@@ -27,10 +26,6 @@ const Signup = () => {
     //     console.log('confirmPassword',confirmPassword.current.value)
     // }
 
-=======
-
-const Signup = () => {
->>>>>>> parent of 1a8896c (Update singup module)
     return (
         <div className="account-wrapper">
             <h3 className="title">Sign Up</h3>
@@ -68,11 +63,7 @@ const Signup = () => {
                 </div> */}
                 <hr/>
                 <div className="form-group">
-<<<<<<< HEAD
                     <button className="d-block default-btn move-top" onClick={register}>Sign Up Now</button>
-=======
-                    <button className="d-block default-btn move-top"><span>Sign Up Now</span></button>
->>>>>>> parent of 1a8896c (Update singup module)
                 </div>
             </div>
             <div className="account-bottom">

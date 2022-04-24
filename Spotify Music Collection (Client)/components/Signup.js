@@ -1,6 +1,31 @@
 import Link from 'next/link';
+import Axios from 'axios';
+import { useRef } from 'react';
+// import { response } from '../../Spotify Music Collection (Server)';
 
 const Signup = () => {
+
+    const username = useRef();
+    const password = useRef();
+    const confirmPassword = useRef();
+
+    const register = () => {
+        Axios.post('https://localhost:3001/register', {
+            username: username.current.value, 
+            password: password.current.value
+        }).then(response => {
+            console.log(response);
+        })
+        console.log('Axios post username', username.current.value)
+        console.log('Axios post password', password.current.value)
+    }
+
+    // const  signUpInfo=()=> {
+    //     console.log('username',username.current.value)
+    //     console.log('password',password.current.value)
+    //     console.log('confirmPassword',confirmPassword.current.value)
+    // }
+
     return (
         <div className="account-wrapper">
             <h3 className="title">Sign Up</h3>
@@ -38,7 +63,7 @@ const Signup = () => {
                 </div> */}
                 <hr/>
                 <div className="form-group">
-                    <button className="d-block default-btn move-top"><span>Sign Up Now</span></button>
+                    <button className="d-block default-btn move-top" onClick={register}>Sign Up Now</button>
                 </div>
             </div>
             <div className="account-bottom">

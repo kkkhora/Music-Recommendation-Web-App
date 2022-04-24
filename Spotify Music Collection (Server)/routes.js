@@ -1,9 +1,9 @@
 const config = require('./config.json')
 const mysql = require('mysql');
-const e = require('express');
+// const express = require('express');
 const { query } = require('express');
+// const app = express();
 
-// TODO: fill in your connection details here
 const connection = mysql.createConnection({
     host: config.rds_host,
     user: config.rds_user,
@@ -12,6 +12,24 @@ const connection = mysql.createConnection({
     database: config.rds_db
 });
 connection.connect();
+
+// app.use(express.json());
+
+// app.post('/register', (req, res) => {
+
+//     const username = req.body.username
+//     const password = req.body.password
+
+//     connection.query("INSERT INTO Users (username, password) VALUES (?, ?)", 
+//     [username, password], 
+//     (err, result) => {
+//         console.log(err);
+//     })
+// })
+
+// app.listen(3001, () => {
+//     console.log("running server");
+// })
 
 
 // ********************************************
@@ -35,10 +53,10 @@ async function Search_length(sql) {
 
 async function registerResponse(req, res) {
     var username = req.body.username;
-    var email = req.body.email;
+    // var email = req.body.email;
     var password = req.body.password;
     var check = 'select password from Users where username = "' + username + '"';
-    var register = "insert into Users (username, email, password) values (\"" + username + "\",\"" + email + "\",\"" + password + "\");";
+    var register = "insert into Users (username, password) values (\"" + username + "\",\"" +  password + "\");";
     connection.query(check, function (err, result) {
         var message = JSON.stringify(result);
         if (message.length == 2) {
@@ -519,8 +537,8 @@ async function userRec_random(req, res) {
 }
 
 module.exports = {
-    // registerResponse,
-    // loginResponse,
+    registerResponse,
+    loginResponse,
     search_country,
     search_year,
     search_year_range,

@@ -17,9 +17,9 @@ const Signup = () => {
         }).then(response => {
             console.log(response);
         })
-        console.log("username", username.current.value)
-        console.log("password", password.current.value)
-        console.log("confirmPassword", confirmPassword.current.value)
+        // console.log("username", username.current.value)
+        // console.log("password", password.current.value)
+        // console.log("confirmPassword", confirmPassword.current.value)
     }
 
     return (

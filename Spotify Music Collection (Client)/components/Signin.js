@@ -8,22 +8,15 @@ const Signin = () => {
     const username = useRef();
     const password = useRef();
 
-    // const  signInInfo=()=> {
-    //     console.log('formRef1',formRef1.current.value)
-    //     console.log('formRef2',formRef2.current.value)
-    // }
-    // const onChangeHandler=(e)=>{
-    //     console.log('data input',e)
-    // }
     const login = () => {
-        Axios.post('http://localhost:3001/register', {
+        Axios.post('http://localhost:3001/login', {
             username: username.current.value, 
             password: password.current.value
         }).then(response => {
             console.log(response);
         })
-        console.log("username", username.current.value)
-        console.log("password", password.current.value)
+        // console.log("username", username.current.value)
+        // console.log("password", password.current.value)
     }
 
     return (
@@ -31,12 +24,12 @@ const Signin = () => {
             <h3 className="title">Sign In</h3>
             <div className="account-form">
                 <div className="form-floating mb-3">
-                    <input ref={formRef1} type="text" className="form-control" id="floatingInput"
+                    <input ref={username} type="text" className="form-control" id="floatingInput"
                         placeholder="User ID"/>
                     <label>User ID</label>
                 </div>
                 <div className="form-floating">
-                    <input ref={formRef2} type="password" className="form-control" id="floatingPassword"
+                    <input ref={password} type="password" className="form-control" id="floatingPassword"
                         placeholder="Password" />
                     <label>Password</label>
                 </div>

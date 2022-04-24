@@ -74,12 +74,12 @@ const song = () => {
                         <table className="table table-hover rank-table">
                             <thead>
                                 <tr>
-                                    <th scope="col">Track id</th>
+                                    <th scope="col">Item Number</th>
                                     <th scope="col">Song Name</th>
                                     <th scope="col">Artist</th>
                                     <th scope="col">Release Year </th>
                                     <th scope="col">Genre </th>
-                                    <th scope="col">Spotify Link</th>
+                                    <th scope="col">Listen on Spotify</th>
                                 </tr>
                             </thead>
                             <tbody>

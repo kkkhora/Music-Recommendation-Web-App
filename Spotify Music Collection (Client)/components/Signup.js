@@ -4,6 +4,7 @@ import { useRef } from 'react';
 
 const Signup = () => {
 
+    //add variables to store user input
     const username = useRef();
     const password = useRef();
     const confirmPassword = useRef();

@@ -1,20 +1,30 @@
 import Link from 'next/link';
+import Axios from 'axios';
 import { useRef } from 'react';
-
-
 
 const Signin = () => {
 
-    const formRef1 = useRef();
-    const formRef2 = useRef();
+    //add variables to store user input
+    const username = useRef();
+    const password = useRef();
 
-    const  signInInfo=()=> {
-        console.log('formRef1',formRef1.current.value)
-        console.log('formRef2',formRef2.current.value)
-    }
+    // const  signInInfo=()=> {
+    //     console.log('formRef1',formRef1.current.value)
+    //     console.log('formRef2',formRef2.current.value)
+    // }
     // const onChangeHandler=(e)=>{
     //     console.log('data input',e)
     // }
+    const login = () => {
+        Axios.post('http://localhost:3001/register', {
+            username: username.current.value, 
+            password: password.current.value
+        }).then(response => {
+            console.log(response);
+        })
+        console.log("username", username.current.value)
+        console.log("password", password.current.value)
+    }
 
     return (
         <div className="account-wrapper">
@@ -43,7 +53,7 @@ const Signin = () => {
                 </div> */}
                 <hr/>
                 <div className="form-group">
-                    <button className="d-block default-btn move-top" onClick={signInInfo}>Sign In</button>
+                    <button className="d-block default-btn move-top" onClick={login}>Sign In</button>
                 </div>
             </div>
             <div className="account-bottom">

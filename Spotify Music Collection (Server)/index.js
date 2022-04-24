@@ -36,6 +36,7 @@ app.get('/userRec/country',routes.userRec_year)//if no user data, random
 
 //user registration module
 app.post('/register', routes.registerResponse)
+app.post('/login', routes.loginResponse)
 
 
 app.listen(config.server_port, () => {

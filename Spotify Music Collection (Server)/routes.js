@@ -34,6 +34,7 @@ async function Search_length(sql) {
 }
 
 async function registerResponse(req, res) {
+    console.log("Recieved")
     var username = req.body.username;
     // var email = req.body.email;
     var password = req.body.password;

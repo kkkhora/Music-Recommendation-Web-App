@@ -10,9 +10,10 @@ const Signup = () => {
     const confirmPassword = useRef();
 
     const register = () => {
-        Axios.post('https://localhost:3001/register', {
+        Axios.post('http://localhost:3001/register', {
             username: username.current.value, 
-            password: password.current.value
+            password: password.current.value,
+            confirmPassword: confirmPassword.current.value
         }).then(response => {
             console.log(response);
         })

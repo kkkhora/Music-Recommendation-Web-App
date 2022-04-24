@@ -1,5 +1,6 @@
 const express = require('express');
-const mysql      = require('mysql');
+const mysql = require('mysql');
+// const express = require('express');
 var cors = require('cors')
 
 
@@ -12,6 +13,7 @@ const app = express();
 
 // whitelist localhost 3000
 app.use(cors({ credentials: true, origin: ['http://localhost:3000'] }));
+app.use(express.json());
 
 //SIGN IN
 // app.post('/register', routes.registerResponse);
@@ -33,8 +35,19 @@ app.get('/userPlaylist',routes.playlist)
 app.get('/userRec/features',routes.userRec_features)//if no user data, random
 app.get('/userRec/country',routes.userRec_year)//if no user data, random
 //app,get('/userRec/year',routes.userRec_random)//if no user data, random
+//post user registration information
+// app.post('/register', (req, res) => {
 
+//     const username = req.body.username
+//     const password = req.body.password
 
+//     connection.query("INSERT INTO Users (username, password) VALUES (?, ?)", 
+//     [username, password], 
+//     (err, result) => {
+//         console.log(err);
+//     })
+// })
+app.post('/register', routes.registerResponse)
 
 
 app.listen(config.server_port, () => {

@@ -35,10 +35,11 @@ async function Search_length(sql) {
 
 async function registerResponse(req, res) {
     var username = req.body.username;
-    var email = req.body.email;
+    // var email = req.body.email;
     var password = req.body.password;
     var check = 'select password from Users where username = "' + username + '"';
-    var register = "insert into Users (username, email, password) values (\"" + username + "\",\"" + email + "\",\"" + password + "\");";
+    // var register = "insert into Users (username, email, password) values (\"" + username + "\",\"" + email + "\",\"" + password + "\");";
+    var register = "insert into Users (username, password) values (\"" + username + "\",\"" + password + "\");";
     connection.query(check, function (err, result) {
         var message = JSON.stringify(result);
         if (message.length == 2) {
@@ -519,8 +520,8 @@ async function userRec_random(req, res) {
 }
 
 module.exports = {
-    // registerResponse,
-    // loginResponse,
+    registerResponse,
+    loginResponse,
     search_country,
     search_year,
     search_year_range,

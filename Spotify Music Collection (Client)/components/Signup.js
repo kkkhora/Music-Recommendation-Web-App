@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Axios from 'axios';
 import { useRef } from 'react';
-// import { response } from '../../Spotify Music Collection (Server)';
 
 const Signup = () => {
 
@@ -10,28 +9,24 @@ const Signup = () => {
     const confirmPassword = useRef();
 
     const register = () => {
-        Axios.post('https://localhost:3001/register', {
+        Axios.post('http://localhost:3001/register', {
             username: username.current.value, 
-            password: password.current.value
+            password: password.current.value,
+            confirmPassword: confirmPassword.current.value
         }).then(response => {
             console.log(response);
         })
-        console.log('Axios post username', username.current.value)
-        console.log('Axios post password', password.current.value)
+        console.log("username", username.current.value)
+        console.log("password", password.current.value)
+        console.log("confirmPassword", confirmPassword.current.value)
     }
-
-    // const  signUpInfo=()=> {
-    //     console.log('username',username.current.value)
-    //     console.log('password',password.current.value)
-    //     console.log('confirmPassword',confirmPassword.current.value)
-    // }
 
     return (
         <div className="account-wrapper">
             <h3 className="title">Sign Up</h3>
             <div className="account-form">
                 <div className="form-floating mb-3">
-                    <input type="text" className="form-control" id="userIdInput" placeholder="user-id" />
+                    <input ref={username} type="text" className="form-control" id="userIdInput" placeholder="user-id" />
                     <label>User ID</label>
                 </div>
                 {/* <div className="form-floating mb-3">
@@ -40,12 +35,12 @@ const Signup = () => {
                     <label>Email address</label>
                 </div> */}
                 <div className="form-floating mb-3">
-                    <input type="password" className="form-control" id="floatingPassword"
+                    <input ref={password} type="password" className="form-control" id="floatingPassword"
                         placeholder="Password" />
                     <label>Password</label>
                 </div>
                 <div className="form-floating mb-3">
-                    <input type="password" className="form-control" id="confirmPass"
+                    <input ref={confirmPassword} type="password" className="form-control" id="confirmPass"
                         placeholder="Confirm Password" />
                     <label>Confirm Password</label>
                 </div>
@@ -63,7 +58,7 @@ const Signup = () => {
                 </div> */}
                 <hr/>
                 <div className="form-group">
-                    <button className="d-block default-btn move-top" onClick={register}>Sign Up Now</button>
+                    <button className="d-block default-btn move-top" onClick={register}><span>Sign Up Now</span></button>
                 </div>
             </div>
             <div className="account-bottom">

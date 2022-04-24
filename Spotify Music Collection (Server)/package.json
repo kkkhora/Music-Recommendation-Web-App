@@ -6,7 +6,10 @@
     "mysql": "^2.18.1",
     "node-fetch": "^3.0.0",
     "nodemon": "^2.0.12",
-    "supertest": "^6.1.6"
+    "supertest": "^6.1.6",
+    "next": "^12.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
     "jest": "^27.1.0",
@@ -14,7 +17,9 @@
   },
   "scripts": {
     "test": "jest --coverage",
-    "start": "nodemon server.js",
-    "webpack": "webpack --version"
+    "webpack": "webpack --version",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
   }
 }

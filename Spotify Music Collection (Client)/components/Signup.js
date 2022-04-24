@@ -1,4 +1,5 @@
 import Link from 'next/link';
+<<<<<<< HEAD
 import Axios from 'axios';
 import { useRef } from 'react';
 import { response } from '../../Spotify Music Collection (Server)';
@@ -26,12 +27,16 @@ const Signup = () => {
     //     console.log('confirmPassword',confirmPassword.current.value)
     // }
 
+=======
+
+const Signup = () => {
+>>>>>>> parent of 1a8896c (Update singup module)
     return (
         <div className="account-wrapper">
             <h3 className="title">Sign Up</h3>
             <div className="account-form">
                 <div className="form-floating mb-3">
-                    <input ref={username} type="text" className="form-control" id="userIdInput" placeholder="user-id"/>
+                    <input type="text" className="form-control" id="userIdInput" placeholder="user-id" />
                     <label>User ID</label>
                 </div>
                 {/* <div className="form-floating mb-3">
@@ -40,11 +45,12 @@ const Signup = () => {
                     <label>Email address</label>
                 </div> */}
                 <div className="form-floating mb-3">
-                    <input ref={password} type="password" className="form-control" id="floatingPassword" placeholder="Password"/>
+                    <input type="password" className="form-control" id="floatingPassword"
+                        placeholder="Password" />
                     <label>Password</label>
                 </div>
                 <div className="form-floating mb-3">
-                    <input ref={confirmPassword} type="password" className="form-control" id="confirmPass"
+                    <input type="password" className="form-control" id="confirmPass"
                         placeholder="Confirm Password" />
                     <label>Confirm Password</label>
                 </div>
@@ -62,7 +68,11 @@ const Signup = () => {
                 </div> */}
                 <hr/>
                 <div className="form-group">
+<<<<<<< HEAD
                     <button className="d-block default-btn move-top" onClick={register}>Sign Up Now</button>
+=======
+                    <button className="d-block default-btn move-top"><span>Sign Up Now</span></button>
+>>>>>>> parent of 1a8896c (Update singup module)
                 </div>
             </div>
             <div className="account-bottom">

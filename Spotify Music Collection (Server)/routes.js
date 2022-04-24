@@ -56,7 +56,7 @@ async function registerResponse(req, res) {
     // var email = req.body.email;
     var password = req.body.password;
     var check = 'select password from Users where username = "' + username + '"';
-    var register = "insert into Users (username, password) values (\"" + username + "\",\"" + email + "\",\"" + password + "\");";
+    var register = "insert into Users (username, password) values (\"" + username + "\",\"" +  password + "\");";
     connection.query(check, function (err, result) {
         var message = JSON.stringify(result);
         if (message.length == 2) {

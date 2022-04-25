@@ -1,0 +1,51 @@
+[
+    {
+        "id": 1,
+        "image": "assets/images/category/Acoustic.jpg",
+        "name": "Acoustic"
+       
+    },
+    {
+        "id": 2,
+        "image": "assets/images/category/Afro-beat.jpg",
+        "name": "Afro-Beat"
+       
+    },
+    {
+        "id": 3,
+        "image": "assets/images/category/Alternative.jpg",
+        "name": "Alternative"
+       
+    },
+    {
+        "id": 4,
+        "image": "assets/images/category/Ambient.jpg",
+        "name": "Ambient"
+       
+    },
+    {
+        "id": 5,
+        "image": "assets/images/category/Anime.jpg",
+        "name": "Anime"
+       
+    },
+    {
+        "id": 6,
+        "image": "assets/images/category/Arabic.jpg",
+        "name": "Arabic"
+       
+    },
+    {
+        "id": 7,
+        "image": "assets/images/category/Big_band.jpg",
+        "name": "Big Band"
+       
+    },
+    {
+        "id": 8,
+        "image": "assets/images/category/Bluegrass.jpg",
+        "name": "Bluegrass"
+       
+    }
+   
+]

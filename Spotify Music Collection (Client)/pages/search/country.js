@@ -36,7 +36,7 @@ class country extends React.Component {
     };
 
     getSearchCountry(){
-      fetch(`http://localhost:8080/search/country?countryCode=${this.state.countryCode}`, {
+      fetch(`http://localhost:3001/search/country?countryCode=${this.state.countryCode}`, {
         method: "GET",
       }).then(res=> {
         return res.json();

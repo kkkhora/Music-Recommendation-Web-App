@@ -1,4 +1,4 @@
-import config from './config.json'
+import config from '../config.json'
 
 const getsearch_year = async (year,page=1, pagesize=10) => {
     var res = await fetch(`http://${config.server_host}:${config.server_port}/search/year?year=${year}&page=${page}&pagesize=${pagesize}`, {

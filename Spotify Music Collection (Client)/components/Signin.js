@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Axios from 'axios';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 const Signin = () => {
 
@@ -14,6 +14,14 @@ const Signin = () => {
             password: password.current.value
         }).then(response => {
             console.log(response);
+            if(response.data.status == 'success' ){
+                let storage = window.localStorage;
+                storage.setItem("username", username.current.value);
+                window.location = '/'
+            }else{
+                let storage = window.localStorage;
+                storage.setItem("username", "");
+            }
         })
         // console.log("username", username.current.value)
         // console.log("password", password.current.value)

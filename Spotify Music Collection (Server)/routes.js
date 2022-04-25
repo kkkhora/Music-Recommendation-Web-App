@@ -34,11 +34,11 @@ async function Search_length(sql) {
     return length
 }
 
-async function validateUserInfo(req, res) {
-    if (req.session.loggedin) {
-        res.redirect('/home');
-    }
-}
+// async function validateUserInfo(req, res) {
+//     if (req.session.loggedin) {
+//         res.redirect('/home');
+//     }
+// }
 
 async function registerResponse(req, res) {
     var username = req.body.username;
@@ -90,9 +90,9 @@ async function loginResponse(req, res) {
                     name: username,
                     status: 'success'
                 });
-                req.session.loggedin = true;
-                req.session.loggedin = username;
-                res.redirect('/');
+                // req.session.loggedin = true;
+                // req.session.loggedin = username;
+                // res.redirect('/');
             } else {
                 res.json({
                     status: 'fail'
@@ -530,7 +530,7 @@ async function userRec_random(req, res) {
 }
 
 module.exports = {
-    validateUserInfo,
+    // validateUserInfo,
     registerResponse,
     loginResponse,
     search_country,

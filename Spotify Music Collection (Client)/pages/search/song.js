@@ -56,7 +56,12 @@ const song = () => {
                                         <a>Home</a>
                                     </Link>
                                 </li>
-                                <li className="active">Song Display</li>
+                                <li>
+                                    <Link href="/indextwo">
+                                        <a>Song / Artist Name</a>
+                                    </Link>
+                                </li>
+                                <li className="actives">Song Display</li>
                             </div>
                         </div>
                     </div>

@@ -59,6 +59,11 @@ const SearchResult = () => {
                                         <a>Home</a>
                                     </Link>
                                 </li>
+                                <li>
+                                    <Link href="/indextwo">
+                                        <a>Genre</a>
+                                    </Link>
+                                </li>
                                 <li className="active">Song Display</li>
                             </div>
                         </div>

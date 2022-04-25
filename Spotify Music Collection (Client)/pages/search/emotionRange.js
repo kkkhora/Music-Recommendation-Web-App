@@ -60,7 +60,12 @@ const SearchResult = () => {
                                         <a>Home</a>
                                     </Link>
                                 </li>
-                                <li className="active">Song Display</li>
+                                <li>
+                                    <Link href="/indextwo">
+                                        <a>Emotional Range</a>
+                                    </Link>
+                                </li>
+                                <li className="actives">Song Display</li>
                             </div>
                         </div>
                     </div>

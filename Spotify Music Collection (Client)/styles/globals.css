@@ -710,6 +710,11 @@ ol {
   margin-left: 10px;
 }
 
+.breadcrumb li.actives{
+  margin-left: 10px;
+  color: #dce775;
+}
+
 .blog-section .main-blog .blog-wrapper .post-item .tags-section .social-link-list li:last-child, .account-bottom .social-media li:last-child, .profile-section .member-profile .profile-item .profile-information .profile-pic .custom-upload .file-btn i, .widget.shop-widget .widget-wrapper .shop-menu li.menu-item-has-children {
   margin-right: 0;
 }
@@ -2824,7 +2829,7 @@ aside {
 /*============ Header section css end here ==============*/
 /*============ Page Header  css start here ==============*/
 .page-header-section {
-  background-image: url(../public/assets/images/banner/page-banner.jpg);
+  background-image: url(../public/assets/images/banner/display.jpg);
   background-size: cover;
 }
 .page-header-section.style-1 {
@@ -5234,11 +5239,10 @@ Home page css start here
 }
 
 .ant-pagination-item,.ant-pagination-item-link{
-  size: 10px;
   background-color: #b86948;
   color:#fff;
   font-weight: 700;
-  font-style: normal;}
+  }
 
 /*----map section----*/
 .map-wrapper{

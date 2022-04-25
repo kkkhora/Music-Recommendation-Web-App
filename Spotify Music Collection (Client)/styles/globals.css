@@ -3191,8 +3191,8 @@ Home page css start here
 }
 @media (min-width: 992px) {
   .banner-section.style-1 .banner-wrapper {
-    padding-top: 200px;
-    padding-bottom: 200px;
+    padding-top: 100px;
+    padding-bottom: 100px;
   }
 }
 .banner-section.style-1 .banner-wrapper .banner-content > p {
@@ -3340,8 +3340,23 @@ Home page css start here
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+.gradient-text-pink {
+  background: linear-gradient(315deg, #ffe082 10%, #ec407a 74%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .gradient-text-yello {
   background: linear-gradient(315deg, #2196f3 0%, #fff176 74%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.gradient-text-bluegreen {
+  background: linear-gradient(315deg,  #1de9b6 10%, #2196f3 74%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.gradient-text-bluepink {
+  background: linear-gradient(315deg,  #ef5cf4 10%, #2989d8 74%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

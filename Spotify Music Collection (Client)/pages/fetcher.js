@@ -35,6 +35,20 @@ const getsearch_genre = async (genre,page=1, pagesize=10) => {
     return res.json()
 }
 
+async function getSong() {
+    var res = await fetch(`http://${config.server_host}:${config.server_port}/userRec/song?user=mruan`, {
+        method: 'GET',
+    })
+    return res.json()
+}
+
+async function likeSong() {
+    var res = await fetch(`http://${config.server_host}:${config.server_port}/userlike`, {
+        method: 'POST',
+    })
+    return res.json()
+}
+
 
 
 export {
@@ -44,5 +58,6 @@ export {
     getsearch_emotion_range,
     getsearch_song,
     getsearch_genre,
-
+    getSong,
+    likeSong
 }

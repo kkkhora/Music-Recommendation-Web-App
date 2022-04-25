@@ -1,7 +1,7 @@
 const config = require('./config.json')
 const mysql = require('mysql');
-// const express = require('express');
-const { query } = require('express');
+const express = require('express');
+// const { query } = require('express');
 // const app = express();
 
 const connection = mysql.createConnection({
@@ -13,27 +13,10 @@ const connection = mysql.createConnection({
 });
 connection.connect();
 
-// app.use(express.json());
-
-// app.post('/register', (req, res) => {
-
-//     const username = req.body.username
-//     const password = req.body.password
-
-//     connection.query("INSERT INTO Users (username, password) VALUES (?, ?)", 
-//     [username, password], 
-//     (err, result) => {
-//         console.log(err);
-//     })
-// })
-
-// app.listen(3001, () => {
-//     console.log("running server");
-// })
 
 
 // ********************************************
-//               LOGIN ROUTES
+//                  ROUTES
 // ********************************************
 
 async function Search_length(sql) {
@@ -49,6 +32,12 @@ async function Search_length(sql) {
     let length = num.length
     console.log('length',length);
     return length
+}
+
+async function validateUserInfo(req, res) {
+    if (req.session.loggedin) {
+        res.redirect('/home');
+    }
 }
 
 async function registerResponse(req, res) {
@@ -101,6 +90,9 @@ async function loginResponse(req, res) {
                     name: username,
                     status: 'success'
                 });
+                req.session.loggedin = true;
+                req.session.loggedin = username;
+                res.redirect('/');
             } else {
                 res.json({
                     status: 'fail'
@@ -538,6 +530,7 @@ async function userRec_random(req, res) {
 }
 
 module.exports = {
+    validateUserInfo,
     registerResponse,
     loginResponse,
     search_country,

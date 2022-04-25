@@ -15,11 +15,11 @@ const Banner = () => {
                     <div className="row align-items-center justify-content-center">
                         <div className="col-lg-8">
                             <div className="banner-content text-center">
-                                <h2>Discover, Collect
-                                    And Sell Extraordinary NFTs </h2>
-                                <p>Digital Marketplace For Crypto Collectibles And Non-Fungible Tokens.</p>
+                                <h2>Discover, Select
+                                    And Listen to Extraordinary Songs </h2>
+                                <p>Digital music platforms that gives you access to thousand of songs from creators all over the world.</p>
                                 <div className="banner-btns d-flex flex-wrap justify-content-center">
-                                    <Link href="/404">
+                                    <Link href="/indextwo">
                                     <a className="default-btn move-top"><span>Pick Songs By Song Info</span> 
                                     </a>
                                     </Link>
@@ -29,7 +29,7 @@ const Banner = () => {
                                     </a>
                                     </Link>
 
-                                    <Link href="/signin">
+                                    <Link href="/indexthree">
                                     <a className="default-btn move-top"><span>Pick Songs By Emotional Tendency</span>
                                     </a>
                                     </Link>

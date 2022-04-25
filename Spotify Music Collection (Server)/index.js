@@ -33,11 +33,13 @@ app.get('/userPlaylist',routes.playlist)
 app.get('/userRec/features',routes.userRec_features)//if no user data, random
 app.get('/userRec/country',routes.userRec_year)//if no user data, random
 //app,get('/userRec/year',routes.userRec_random)//if no user data, random
+app.get('/userRec/song', routes.userRec_song)//if no user data, random
 
 //user registration module
 app.post('/register', routes.registerResponse)
 app.post('/login', routes.loginResponse)
-
+app.post('/like/:username/:songID', routes.user_like)
+app.post('/dislike', routes.remove_like)
 
 app.listen(config.server_port, () => {
     console.log(`Server running at http://${config.server_host}:${config.server_port}/`);

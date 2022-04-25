@@ -9,7 +9,7 @@ const BannerTwo = () => {
                         <div className="col-lg-7">
                             <div className="banner-content">
                                 <h1 className="mb-3"><span className="gradient-text-orange">Search</span> For Your Favourite
-                                    <span className="gradient-text-orange"> Songs</span>
+                                    <span className="gradient-text-pink"> Songs</span>
                                 </h1>
                                 <p className="mb-5">You can browse your favourite songs by song name, year, genre and artist name.</p>
                 

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 //import PageHeader from '../components/PageHaeder';
 import { getsearch_year } from '../fetcher';
 import Link from "next/link";
-import { Pagination } from 'antd';
+import ReactPaginate from 'react-paginate';
 
 const PageHeaderText =
 {
@@ -32,9 +32,11 @@ const song = () => {
         }
 
     }
-    const handlepageChange = (page, pageSize) => {
-        filterParams(page, pageSize) 
-    }
+    const handlepageChange = ({selected}) => {
+        var page=selected + 1
+        filterParams( page)
+        console.log(selected)
+    };
     useEffect(() => {
         filterParams()
     }, [])
@@ -127,9 +129,17 @@ const song = () => {
 
                             </tbody>
                         </table>
-                        <div style={{display:'flex',justifyContent:'center',alignItems:'center'}} >
-                <Pagination  defaultCurrent={1} total={count}  onChange={ filterParams} />
-                </div>
+                        <ReactPaginate
+                            previousLabel={"<<"}
+                            nextLabel={">>"}
+                            pageCount={Math.ceil(count / 10)}
+                            onPageChange={handlepageChange}
+                            containerClassName={"paginationBttns"}
+                            previousLinkClassName={"previousBttn"}
+                            nextLinkClassName={"nextBttn"}
+                            disabledClassName={"paginationDisabled"}
+                            activeClassName={"paginationActive"}
+                        />
                     </div>
                 </div>
             </section>

@@ -5234,10 +5234,11 @@ Home page css start here
 }
 
 .ant-pagination-item,.ant-pagination-item-link{
+  size: 10px;
   background-color: #b86948;
   color:#fff;
   font-weight: 700;
-}
+  font-style: normal;}
 
 /*----map section----*/
 .map-wrapper{

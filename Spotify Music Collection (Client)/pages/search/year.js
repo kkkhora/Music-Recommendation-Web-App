@@ -108,7 +108,7 @@ const song = () => {
                                     <th scope="col">Genre </th>
                                     <th scope="col">Add to Playlist</th>
                                     <th scope="col">Listen on Spotify</th>
-                                    <th scope="col">Like</th>
+                
                                 </tr>
                             </thead>
                             <tbody >
@@ -143,15 +143,13 @@ const song = () => {
                                             <td className="rank-owner" style={{ width: 100 }}>{item.Album_year}</td>
                                             <td className="rank-assets" style={{ width: 100 }}>{item.Song_genre}</td>
                                             <td className="rank-assets">
-                                                    <img src="http://localhost:3000/assets/images/logo/likes-button.png" alt="Likes" />
+                                                    <img src="http://localhost:3000/assets/images/logo/likes-button.png"id = 'button' onClick = {() => userLike(window.localStorage.getItem("username"), String(item.Song_ID))} alt="Likes" />
                                                </td>
                                             <td className="rank-assets"> 
                                               <a  target='_blank' href={`https://open.spotify.com/track/${item.Song_ID.split(':')[item.Song_ID.split(':').length-1]}`}>
                                               <img src="http://localhost:3000/assets/images/logo/spotify_logo3.png" alt="Spotify Logo" />
                                             </a></td>
-                                            <td className="rank-assets">
-                                            <img src="http://localhost:3000/assets/images/logo/dislike_button.png"  id = 'button' onClick = {() => userLike(window.localStorage.getItem("username"), String(item.Song_ID))}/>
-                                            </td>
+                        
 
 
                                         </tr>

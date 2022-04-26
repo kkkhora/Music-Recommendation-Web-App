@@ -1,7 +1,9 @@
 import PageHeader from '../components/PageHaeder';
-import { getSong } from './fetcher';
-import { getPlaylist } from './fetcher';
+import {getSong} from '../pages/fetcher';
+import { getPlaylist } from '../pages/fetcher';
 import React , {useEffect} from "react";
+import { useState} from 'react';
+import Axios from 'axios';
 // import { use } from '../../project_server_client/server/server';
 // import LikeButton from '../../project_server_client/client/src/pages/LikeButton';
 
@@ -20,8 +22,7 @@ class UserRec extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            // username:window.localStorage.getItem("username"),
-            username:"mruan",
+            username: null,
             songList:[],
             playList:[]
         };
@@ -33,11 +34,10 @@ class UserRec extends React.Component {
       //   this.goToSearch = this.goToSearch.bind(this)
       }
       componentDidMount() {
-
         getSong(this.state.username).then(res => {
             this.setState({ songList: res.results })
         });
-
+        this.setState({username: window.localStorage.getItem("username")});
         getPlaylist(this.state.username).then(res => {
             this.setState({ playList: res.results })
         })

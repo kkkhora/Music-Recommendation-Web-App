@@ -514,7 +514,7 @@ async function userRec_year(req, res) {
 
 async function user_like(req, res){
     var username = req.params.username;
-    var songID = req.params.song;
+    var songID = req.params.songID;
     connection.query(`
     INSERT INTO User_likes(username, Song_ID)
     VALUES("${username}", "${songID}")

@@ -45,17 +45,17 @@ class UserRec extends React.Component {
 
     }
 
-    setUsername = () => {
-        const un = localStorage.getItem("username");
-        return un;
-    }
+    // setUsername = () => {
+    //     const un = localStorage.getItem("username");
+    //     return un;
+    // }
 
     userLike = (userID, songID) => {
 
-        if (!window.localStorage.getItem("username")) {
-            alert("Please log in first!");
-            return;
-        }
+        // if (!window.localStorage.getItem("username")) {
+        //     alert("Please log in first!");
+        //     return;
+        // }
 
         fetch(`http://localhost:3001/like/${userID}/${songID}`, {
             method: 'GET'
@@ -190,7 +190,7 @@ class UserRec extends React.Component {
                                                         {/* </Link> */}
                                                         </p>
                                                         <p>Released: {`${item.Album_year}`}</p>
-                                                        <img src="http://localhost:3000/assets/images/logo/likes-button.png"  id = 'button' onClick = {() => this.userLike(this.state.username, String(item.Song_ID))}/>  
+                                                        <img src="http://localhost:3000/assets/images/logo/likes-button.png"  id = 'button' onClick = {() => this.userLike(window.localStorage.getItem("username"), String(item.Song_ID))}/>  
                                                         <a target='_blank' href={`https://open.spotify.com/track/${item.Song_ID.slice(-22)}`}>
                                                         &nbsp;&nbsp;&nbsp;
                                                     <img src="http://localhost:3000/assets/images/logo/spot_button.png" alt="Spotify Logo" />

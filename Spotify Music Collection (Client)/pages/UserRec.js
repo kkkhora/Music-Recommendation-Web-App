@@ -1,54 +1,93 @@
 import PageHeader from '../components/PageHaeder';
-import {getSong} from '../pages/fetcher'
+import {getSong} from '../pages/fetcher';
+import { getPlaylist } from '../../project_server_client/client/src/fetcher';
 import React , {useEffect} from "react";
+import { useState} from 'react';
 import Axios from 'axios';
+// import { use } from '../../project_server_client/server/server';
 // import LikeButton from '../../project_server_client/client/src/pages/LikeButton';
 
 const PageHeaderText =
 {
     "linkText":"Home",
-    "heading":"Song Recommendation"
+    "heading":"Song Recommendation Test"
 };
 
-const handleLike = () => {
 
-    console.log("I like this song");
-}
-
-const username = "mruan";
+// const username = "mruan";
 
 
-const Like = (userID, songID) => {
-    // Axios.post('http://localhost:8080/like', {
-    //     username: userID, 
-    //     songID: songID
-    // }).then(response => {
-    //     console.log("error");
-    // })
-    console.log(userID); 
-    console.log(songID); 
-}
 
 class UserRec extends React.Component {
     constructor(props) {
         super(props)
-    
         this.state = {
-  
-          songList:[],
-          page: 1
+            username: window.localStorage.getItem("username"),
+            songList:[],
+            playList:[]
         };
-        
+
+        this.userLike = this.userLike.bind(this);
+        this.userDislike = this.userDislike.bind(this);
         // console.log(props.router.query)
       //   this.songOnChange = this.songOnChange.bind(this);
       //   this.goToSearch = this.goToSearch.bind(this)
       }
       componentDidMount() {
-        getSong().then(res => {
-        this.setState({ songList: res.results })
-    })
+        getSong(username).then(res => {
+            this.setState({ songList: res.results })
+        });
 
+        getPlaylist(username).then(res => {
+            this.setState({ playList: res.results })
+        })
     }
+
+    userLike = (userID, songID) => {
+
+        // if (!this.state.username) {
+        //     alert("Please log in first!");
+        //     return;
+        // }
+
+        fetch(`http://localhost:8080/like/${userID}/${songID}`, {
+            method: 'GET'
+          })
+            .then(res => res.json())
+            .then(res => {
+              //res is {status: "success"} if server -> db is sucessful
+              if (res.status === "success") {
+                alert("Thank you for liking it!");
+              } else {
+                alert("Error!");
+              }
+            })
+            .catch(err => console.log(err));
+            window.location.reload(false);
+    }
+
+    userDislike = (userID, songID) => {
+        if (!this.state.username) {
+            alert("Please log in first!");
+            return;
+        }
+
+        fetch(`http://localhost:8080/dislike/${userID}/${songID}`, {
+            method: 'GET'
+          })
+            .then(res => res.json())
+            .then(res => {
+              //res is {status: "success"} if server -> db is sucessful
+              if (res.status === "success") {
+                alert("Sorry you don't like it!");
+              } else {
+                alert("Error!");
+              }
+            })
+            .catch(err => console.log(err));
+    
+    }
+    
 
     
     render() {
@@ -57,30 +96,66 @@ class UserRec extends React.Component {
         <PageHeader text={PageHeaderText} />
         
         <section className="activity-section padding-top padding-bottom">
+
+            
         <div className="container">
+             <div className="section-header">
+                <h3>Your Playlist</h3>
+                <div className="nft-filter d-flex flex-wrap justify-content-center gap-15">
+
+                </div>
+    
+            </div>
+            <div className="activity-wrapper activity-loadmore">
+                            <div className="row gy-3">
+                                {
+                                    this.state.playList.map((item) =>(
+                                        <div className="col-12" key={item.id}>
+                                            <div className="activity-item">
+                                                <div
+                                                    className="lab-inner d-flex flex-row-reverse align-items-center p-3 p-md-4">
+                                                    <div className="lab-thumb me-3 me-md-4">
+                                                        <img src={`${item.Track_image}`} width="250px" height="160px" alt="Category Image" />
+                                                    </div>
+                                                    <div className="lab-content" >
+                                                        <h4>
+                                                            {/* <Link href="/itemdetails"> */}
+                                                            <a>{`${item.Song_name}`}</a>
+                                                            {/* </Link> */}
+                                                        </h4>
+                                                        <p className="mb-2">{`${item.Song_genre}`}
+                                                        </p>
+                                                        <p className="user-id">By: 
+                                                        {/* <Link href="/author"> */}
+                                                        <a >{`${item.Artist_name}`}</a>
+                                                        {/* </Link> */}
+                                                        </p>
+                                                        <p>Released: {`${item.Album_year}`}</p>
+                                                        <button id = 'button' onClick = {() => this.userDislike(username, String(item.Song_ID))}> Unlike </button> 
+                                                        <a target='_blank' href={`https://open.spotify.com/track/${item.Song_ID.slice(-22)}`}>
+
+                                                    <img src="http://localhost:3000/assets/images/logo/spotify_logo.png" alt="Spotify Logo" width="50px" height="50px" />
+                                                </a>
+                                                <a>
+
+                                                </a>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))
+
+                                }
+                                
+                            </div>
+                        </div>
 
             <div className="section-wrapper">
                 <div className="row">
                     <div className="col-xl-12">
                         <div className="section-header">
                             <h3>Guess What You like</h3>
-                            <div className="nft-filter d-flex flex-wrap justify-content-center gap-15">
-                                <div className="form-floating">
-                                    <select className="form-select" id="sortSelect"
-                                        aria-label="Floating label select example">
-                                        <option>Newest</option>
-                                        <option value="1">Trending</option>
-                                        <option value="2">Most Viewed</option>
-                                        <option value="3">Less Viewed</option>
-                                        <option value="3">Ending Soon</option>
-                                        <option value="3">Recently Sold </option>
-                                        <option value="3">Recently Created </option>
-                                        <option value="3">Recently Viewed </option>
-                                        <option value="3">Ending Soon</option>
-                                    </select>
-                                    <label>Sort By</label>
-                                </div>
-                            </div>
                         </div>
                         <div className="activity-wrapper activity-loadmore">
                             <div className="row gy-3">
@@ -107,7 +182,7 @@ class UserRec extends React.Component {
                                                         {/* </Link> */}
                                                         </p>
                                                         <p>Released: {`${item.Album_year}`}</p>
-                                                        <button id = 'button' onClick = {() => Like(username, item.Song_ID)}> Like </button> 
+                                                        <button id = 'button' onClick = {() => this.userLike(username, String(item.Song_ID))}> Like </button> 
                                                         <a target='_blank' href={`https://open.spotify.com/track/${item.Song_ID.slice(-22)}`}>
 
                                                     <img src="http://localhost:3000/assets/images/logo/spotify_logo.png" alt="Spotify Logo" width="50px" height="50px" />
@@ -121,24 +196,7 @@ class UserRec extends React.Component {
                                             </div>
                                         </div>
                                     ))
-                                    // this.state.songList.map((item) =>(
-                                    //     <div className="col" key={item.Song_id}>
-                                    //         <div className="cat-item">                                    
-                                    //             <div className="cat-inner">
-                                    //                 <div className="cat-thumb">
-                                    //                 <a href={`https://open.spotify.com/track/${item.Song_ID.slice(-22)}`} >
-                                    //                     <img src={`${item.Track_image}`} width="160px" height="160px" alt="Category Image" />
-                                    //                     </a>
-                                    //                 </div>
-                                    //                 <div className="cat-content">
-                                    //                     <h6><a>{`${item.Song_name}`}</a></h6>
-                                    //                     <button onClick = {handleLike}> Like </button>
-                                    //                 </div>
-                                    //             </div>
-                                              
-                                    //         </div>
-                                    //     </div>
-                                    // ))
+
                                 }
                                 
                             </div>

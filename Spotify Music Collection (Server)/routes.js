@@ -514,15 +514,57 @@ async function userRec_year(req, res) {
 async function user_like(req, res) {
     var username = req.params.username;
     var songID = req.params.songID;
-    connection.query(`
-    INSERT INTO User_likes(username, Song_ID)
-    VALUES("${username}", "${songID}")
-    `, function (error, results, field) {
-        if (error) {
-            console.log(error)
-            res.json({ error: error })
+    var check = `SELECT username from User_likes where username = "${username}" and Song_ID = "${songID}"`;
+    // var register = "insert into Users (username, email, password) values (\"" + username + "\",\"" + email + "\",\"" + password + "\");";
+    var user_like = `INSERT INTO User_likes(username, Song_ID) VALUES("${username}", "${songID}")`;
+
+    connection.query(check, function (err, result) {
+        var message = JSON.stringify(result);
+        if (message.length == 2) {
+            connection.query(user_like, function (err) {
+                if (err) console.log("Insert error: ", err);
+                else {
+                    res.json({
+                        name: username,
+                        status: 'success'
+                    });
+                }
+            });
         } else {
-            res.json({ status: "success" })
+            res.json({
+                status: 'fail'
+            });
+            console.log("You already liked this song!");
+        }
+    });
+
+
+}
+
+async function check_like(req, res) {
+    var username = req.params.username;
+    var songID = req.params.songID;
+    var check = `SELECT username from User_likes where username = "${username}" and Song_ID = "${songID}"`;
+    // var register = "insert into Users (username, email, password) values (\"" + username + "\",\"" + email + "\",\"" + password + "\");";
+    var user_like = `INSERT INTO User_likes(username, Song_ID) VALUES("${username}", "${songID}")`;
+
+    connection.query(check, function (err, result) {
+        var message = JSON.stringify(result);
+        if (message.length == 2) {
+            connection.query(user_like, function (err) {
+                if (err) console.log("Insert error: ", err);
+                else {
+                    res.json({
+                        name: username,
+                        status: 'success'
+                    });
+                }
+            });
+        } else {
+            res.json({
+                status: 'fail'
+            });
+            console.log("You already liked this song!");
         }
     });
 }
@@ -636,6 +678,7 @@ module.exports = {
     userRec_song,
     user_like,
     remove_like,
-    getPlayList
+    getPlayList, 
+    check_like
 
 }

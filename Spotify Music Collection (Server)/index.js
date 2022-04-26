@@ -40,7 +40,7 @@ app.post('/register', routes.registerResponse)
 app.post('/login', routes.loginResponse)
 app.get('/like/:username/:songID', routes.user_like)
 app.get('/dislike/:username/:songID', routes.remove_like)
-
+app.get('/check/:username/:songID', routes.check_like)
 app.listen(config.server_port, () => {
     console.log(`Server running at http://${config.server_host}:${config.server_port}/`);
 });

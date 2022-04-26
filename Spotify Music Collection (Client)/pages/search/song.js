@@ -16,7 +16,6 @@ const PageHeaderText =
 const song = () => {
     const [musicData, setMusicData] = useState([])
     const [count, setcount] = useState(0);
-    let [disableClick, setClick] = useState(false);
 
     const filterParams = async (page=1, pagesize=10) => {
         if (location.search.indexOf('?') !== -1) {
@@ -34,28 +33,15 @@ const song = () => {
 
     }
     const userLike = (userID, songID) => {
-        if (!disableClick){
-            fetch(`http://localhost:3001/like/${userID}/${songID}`, {
-                method: 'GET'
-              })
-                .then(res => res.json())
-                .then(res => {
-                  //res is {status: "success"} if server -> db is sucessful
-                  if (res.status === "success") {
-                    alert("Thank you for liking it!");
-                  } else {
-                    alert("Error!");
-                  }
-                })
-                .catch(err => console.log(err));
-                console.log(disableClick);
-                window.location.reload(false);
-                setClick(true);
-        }   
-        else{
-            return;
-        }
-
+        fetch(`http://localhost:3001/check/${userID}/${songID}`).then(response => {
+            console.log(response);
+            if(response.status == 'success' ){
+                alert("Thank you for liking this song!");
+            }
+            if(response.status == 'fail' ){
+                alert("You already liked this song!");
+            }
+        })
     }
 
 

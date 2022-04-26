@@ -58,7 +58,7 @@ class UserRec extends React.Component {
             return;
         }
         else {
-            fetch(`http://localhost:3001/like/${userID}/${songID}`, {
+            Axios(`http://localhost:3001/like/${userID}/${songID}`, {
                 method: 'GET'
               })
                 .then(res => res.json())

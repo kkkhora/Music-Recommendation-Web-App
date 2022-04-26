@@ -50,6 +50,13 @@ async function getPlaylist(userID) {
     return res.json()
 }
 
+async function checkLike(userID, songID) {
+    var res = await fetch(`http://${config.server_host}:${config.server_port}/check?username=${userID}&?songID=${songID}`, {
+        method: 'GET',
+    })
+    return res.json()
+}
+
 
 
 export {
@@ -60,5 +67,6 @@ export {
     getsearch_song,
     getsearch_genre,
     getSong,
-    getPlaylist
+    getPlaylist,
+    checkLike
 }

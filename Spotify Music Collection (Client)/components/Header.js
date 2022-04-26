@@ -82,7 +82,7 @@ const Header = () => {
                                     </li>
                                     <li>
                                     <Link href="/allauthorstwo">
-                                        <a className={router.pathname == "/allauthorstwo" ? "drop-down-item active" : "drop-down-item"}>User playlist</a>
+                                        <a className={router.pathname == "/allauthorstwo" ? "drop-down-item active" : "drop-down-item"}>User Playlist</a>
                                     </Link>
                                     </li>
                                 </ul>

@@ -139,10 +139,10 @@ class UserRec extends React.Component {
                                                         {/* </Link> */}
                                                         </p>
                                                         <p>Released: {`${item.Album_year}`}</p>
-                                                        <img src="http://localhost:3000/assets/images/logo/dislikes_button.png"  id = 'button' onClick = {() => this.userDislike(window.localStorage.getItem("username"), String(item.Song_ID))}/>
+                                                        <img src="http://localhost:3000/assets/images/logo/dislike_button.png"  id = 'button' onClick = {() => this.userDislike(window.localStorage.getItem("username"), String(item.Song_ID))}/>
                                                         <a target='_blank' href={`https://open.spotify.com/track/${item.Song_ID.slice(-22)}`}>
 
-                                                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/74/Spotify_App_Logo.svg" alt="Spotify Logo" width="40px" height="40px" />
+                                                    <img src="http://localhost:3000/assets/images/logo/spot_button.png" alt="Spotify Logo" />
                                                 </a>
                                                 <a>
 

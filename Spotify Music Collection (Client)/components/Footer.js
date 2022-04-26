@@ -11,7 +11,7 @@ const Footer = () => {
                                     <h5>About Us</h5>
                                     <ul className="footer-link-list">
                                         <li><a className="footer-link">Team: 404 NOT FOUND</a></li>
-                                        <li><a href="/activity" className="footer-link">Developers Details</a></li>
+                                        <li><a href="/developers" className="footer-link">Developers Details</a></li>
 
                                     </ul>
                                 </div>

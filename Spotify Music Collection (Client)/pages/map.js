@@ -1,19 +1,12 @@
-import PageHeader from '../components/PageHaeder';
+import BannerFour from '../components/BannerFour';
 import InteractiveMap from '../components/InteractiveMap';
 // import{BrowseRouter as Router} from 'react-router-dom';
-
-
-const PageHeaderText =
-{
-    "linkText":"Home",
-    "heading":"Find Songs by Country"
-};
 
 
 const country = () => {
     return (
       <div>
-        <PageHeader text={PageHeaderText} />
+        <BannerFour />
         <InteractiveMap/> 
       </div>
     )

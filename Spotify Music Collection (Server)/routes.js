@@ -30,7 +30,7 @@ async function Search_length(sql) {
     })
 
     let length = num.length
-    console.log('length',length);
+    console.log('length', length);
     return length
 }
 
@@ -149,7 +149,7 @@ async function search_year(req, res) {
                 console.log(error)
                 res.json({ error: error })
             } else if (results) {
-                res.json({ results: results,count })
+                res.json({ results: results, count })
             }
         });
     } else {
@@ -175,7 +175,7 @@ async function search_year_range(req, res) {
         let count = await Search_length(`SELECT Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
         FROM Display_results
         WHERE Album_year >= '${req.query.startYear}' AND Album_year <= '${req.query.endYear}'`)
-        
+
         connection.query(`SELECT Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
         FROM Display_results
         WHERE Album_year >= '${req.query.startYear}' AND Album_year <= '${req.query.endYear}'
@@ -184,7 +184,7 @@ async function search_year_range(req, res) {
                 console.log(error)
                 res.json({ error: error })
             } else if (results) {
-                res.json({ results: results,count })
+                res.json({ results: results, count })
             }
         });
     } else {
@@ -203,7 +203,7 @@ async function search_year_range(req, res) {
 
 
 async function search_emotion_range(req, res) {
-    if (req.query.happysad && !isNaN(req.query.happysad)) {
+    if (req.query.happysad && isNaN(req.query.happysad)) {
         if (req.query.page && !isNaN(req.query.page)) {
 
             const pagesize = req.query.pagesize ? req.query.pagesize : 10
@@ -217,6 +217,7 @@ async function search_emotion_range(req, res) {
             AND Instrumentalness >= '${req.query.minInstrumentalness}' AND Instrumentalness <= '${req.query.maxInstrumentalness}'
             AND Tempo >= '${req.query.minTempo}' AND Tempo <= '${req.query.maxTempo}'
             AND H_s = '${req.query.happysad}'`)
+            
             connection.query(`SELECT D.Song_ID, D.Song_name, Artist_name, Album_year, D.Song_genre, Track_image
             FROM Display_results D JOIN Song_info S ON D.Song_ID = S.Song_ID
             WHERE Acousticness >= '${req.query.minAcousticness}' AND Acousticness <= '${req.query.maxAcousticness}'
@@ -303,8 +304,6 @@ async function search_emotion_range(req, res) {
 }
 
 
-
-
 async function search_song(req, res) {
     if (req.query.page && !isNaN(req.query.page)) {
         const pagesize = req.query.pagesize ? req.query.pagesize : 10
@@ -323,7 +322,7 @@ async function search_song(req, res) {
                     console.log(error)
                     res.json({ error: error })
                 } else if (results) {
-                    res.json({ results: results,count })
+                    res.json({ results: results, count })
                 }
             });
         } else if (req.query.name) {
@@ -338,11 +337,11 @@ async function search_song(req, res) {
                     console.log(error)
                     res.json({ error: error })
                 } else if (results) {
-                    res.json({ results: results ,count})
+                    res.json({ results: results, count })
                 }
             });
         } else if (req.query.artist) {
-            let count =  await Search_length(`SELECT Song_id, Song_name, Artist_name, Album_year, Song_genre, Track_image
+            let count = await Search_length(`SELECT Song_id, Song_name, Artist_name, Album_year, Song_genre, Track_image
             FROM Display_results
             WHERE Artist_name LIKE '%${req.query.artist}%'`)
             connection.query(`SELECT Song_id, Song_name, Artist_name, Album_year, Song_genre, Track_image
@@ -353,7 +352,7 @@ async function search_song(req, res) {
                     console.log(error)
                     res.json({ error: error })
                 } else if (results) {
-                    res.json({ results: results ,count})
+                    res.json({ results: results, count })
                 }
             });
         }
@@ -413,7 +412,7 @@ async function search_genre(req, res) {
                 console.log(error)
                 res.json({ error: error })
             } else if (results) {
-                res.json({ results: results, count})
+                res.json({ results: results, count })
             }
         });
     } else {
@@ -512,25 +511,25 @@ async function userRec_year(req, res) {
     });
 }
 
-async function user_like(req, res){
+async function user_like(req, res) {
     var username = req.params.username;
     var songID = req.params.song;
     connection.query(`
     INSERT INTO User_likes(username, Song_ID)
     VALUES("${username}", "${songID}")
-    `, function(error, results, field){
-        if(error){
+    `, function (error, results, field) {
+        if (error) {
             console.log(error)
-            res.json({error: error})
-        }else{
-            res.json({status:"success"})
+            res.json({ error: error })
+        } else {
+            res.json({ status: "success" })
         }
     });
 }
 
-async function userRec_song(req, res){
-if(req.query.user && !isNaN(req.query.user)){
-    connection.query(`WITH User_most_like AS
+async function userRec_song(req, res) {
+    if (req.query.user && !isNaN(req.query.user)) {
+        connection.query(`WITH User_most_like AS
     (select label, count(1) as song_unit
         FROM User_likes a inner join Song_Classifier b
     on a.Song_ID = b.Song_ID
@@ -544,14 +543,14 @@ if(req.query.user && !isNaN(req.query.user)){
     and label in (select label from User_most_like)
     ORDER BY RAND()
     limit 10
-    `, function(error, results, field){
-        if(error){
-            console.log(error)
-            res.json({error: error})
-        }else if(results){
-            res.json({results:results})
-        }
-    });
+    `, function (error, results, field) {
+            if (error) {
+                console.log(error)
+                res.json({ error: error })
+            } else if (results) {
+                res.json({ results: results })
+            }
+        });
     }
     else {
         connection.query(`
@@ -559,46 +558,46 @@ if(req.query.user && !isNaN(req.query.user)){
         FROM Display_results
         ORDER BY RAND()
         LIMIT 10
-        `, function(error, results, field){
-            if(error){
+        `, function (error, results, field) {
+            if (error) {
                 console.log(error)
-                res.json({error: error})
-            }else if(results){
-                res.json({results:results})
+                res.json({ error: error })
+            } else if (results) {
+                res.json({ results: results })
             }
         });
 
     }
 }
 
-async function remove_like(req, res){
+async function remove_like(req, res) {
     var username = req.params.username;
     var songID = req.params.song;
     connection.query(`
     DELETE FROM User_likes
     WHERE username = "${username}" AND Song_ID = "${songID}"
-    `, function(error, results, field){
-        if(error){
+    `, function (error, results, field) {
+        if (error) {
             console.log(error)
-            res.json({error: error})
-        }else{
-            res.json({status:"success"})
+            res.json({ error: error })
+        } else {
+            res.json({ status: "success" })
         }
     });
 }
 
-async function getPlayList(req, res){
+async function getPlayList(req, res) {
     // if(req.query.user && !isNaN(req.query.user)){
-        connection.query(`SELECT D.Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
+    connection.query(`SELECT D.Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
         FROM  Display_results D 
-        where Song_ID in (select Song_ID from User_likes where username = '${req.query.user}')`, function(error, results, field){
-            if(error){
-                console.log(error)
-                res.json({error: error})
-            }else if(results){
-                res.json({results:results})
-            }
-        });
+        where Song_ID in (select Song_ID from User_likes where username = '${req.query.user}')`, function (error, results, field) {
+        if (error) {
+            console.log(error)
+            res.json({ error: error })
+        } else if (results) {
+            res.json({ results: results })
+        }
+    });
     // }
 }
 
@@ -638,5 +637,5 @@ module.exports = {
     user_like,
     remove_like,
     getPlayList
-    
+
 }

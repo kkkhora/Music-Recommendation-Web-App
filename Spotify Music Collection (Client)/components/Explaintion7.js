@@ -6,7 +6,7 @@ import { IconButton } from '@mui/material';
 
 export default () => (
   <Popup trigger={<IconButton color="secondary"> <LibraryBooksIcon/></IconButton>} position="right center">
-    <div>Which type of songs do you prefer: happy or sad. Click to select.</div>
+    <div>Which type of songs do you prefer: happy or sad or all. Click to select.</div>
   </Popup>
   
 );

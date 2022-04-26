@@ -54,15 +54,19 @@ const SearchbyEmotion = () => {
                 ...value,
                 happysad: (value.happysad === filed && !val) ? 'h' : 's'
             });
-        } else {
-            setvalue({
-                ...value,
-                happysad: (value.happysad === filed && !val) ? 's' : 'h'
-            });
-        }
+        } else if (filed === ''){
+                setvalue({
+                    ...value,
+                    happysad: (value.happysad === filed && !val) ? 'h' : ''
+                });
+        }else if (filed === 'h'){
+                setvalue({
+                    ...value,
+                    happysad: (value.happysad === filed && !val) ? 's' : 'h'
+                });
+        } 
+    }  
 
-
-    }
 
     return (
         <div>
@@ -85,7 +89,7 @@ const SearchbyEmotion = () => {
                                 <h8><span className="gradient-text-yello">Energy:<Explaintion4 /></span></h8><DiscreteSliderLabel4 value={value} setvalue={handlechange} filed='Energy' />
                                 <h8><span className="gradient-text-yello">Instrumentalness:<Explaintion5 /></span></h8><DiscreteSliderLabel4 value={value} setvalue={handlechange} filed='Instrumentalness' />
                                 <h8><span className="gradient-text-yello">Tempo:<Explaintion6 /></span></h8><DiscreteSliderLabel3 value={value} setvalue={handlechange} filed='Tempo' />
-                                <h8><span className="gradient-text-yello">Happy<Checkbox value={value} setvalue={handlecheckbox} filed='h' />/ Sad<Checkbox value={value} setvalue={handlecheckbox} filed='s' /><Explaintion7 /></span></h8>
+                                <h8><span className="gradient-text-yello">Happy<Checkbox value={value} setvalue={handlecheckbox} filed='h' />/ Sad<Checkbox value={value} setvalue={handlecheckbox} filed='s' />/ All<Checkbox value={value} setvalue={handlecheckbox} filed='' /><Explaintion7 /></span></h8>
 
                             </div>
 

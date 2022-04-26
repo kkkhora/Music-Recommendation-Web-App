@@ -42,9 +42,10 @@ async function getSong() {
     return res.json()
 }
 
-async function likeSong() {
-    var res = await fetch(`http://${config.server_host}:${config.server_port}/userlike`, {
-        method: 'POST',
+
+async function getPlaylist(userID) {
+    var res = await fetch(`http://${config.server_host}:${config.server_port}/playlist?user=${userID}`, {
+        method: 'GET',
     })
     return res.json()
 }
@@ -59,5 +60,6 @@ export {
     getsearch_song,
     getsearch_genre,
     getSong,
-    likeSong
+    likeSong,
+    getPlaylist
 }

@@ -12,9 +12,11 @@ const PageHeaderText =
 };
 
 
+
 const song = () => {
     const [musicData, setMusicData] = useState([])
-    const [count, setcount] = useState(0)
+    const [count, setcount] = useState(0);
+    let [disableClick, setClick] = useState(false);
 
     const filterParams = async (page=1, pagesize=10) => {
         if (location.search.indexOf('?') !== -1) {
@@ -31,6 +33,32 @@ const song = () => {
         }
 
     }
+    const userLike = (userID, songID) => {
+        if (!disableClick){
+            fetch(`http://localhost:3001/like/${userID}/${songID}`, {
+                method: 'GET'
+              })
+                .then(res => res.json())
+                .then(res => {
+                  //res is {status: "success"} if server -> db is sucessful
+                  if (res.status === "success") {
+                    alert("Thank you for liking it!");
+                  } else {
+                    alert("Error!");
+                  }
+                })
+                .catch(err => console.log(err));
+                console.log(disableClick);
+                window.location.reload(false);
+                setClick(true);
+        }   
+        else{
+            return;
+        }
+
+    }
+
+
 
     const handlepageChange = ({selected}) => {
         var page=selected + 1
@@ -130,7 +158,7 @@ const song = () => {
                                                 </div>
                                             </td>
                                             <td className="rank-assets">
-                                                    <img src="http://localhost:3000/assets/images/logo/likes-button.png" alt="Likes" />
+                                                    <img src="http://localhost:3000/assets/images/logo/likes-button.png" onClick = {() => userLike(window.localStorage.getItem("username"), String(item.Song_ID))} alt="Likes" />
                                                </td>
                                             <td className="rank-assets">
                                                 <a target='_blank' href={`https://open.spotify.com/track/${item.Song_ID.split(':')[item.Song_ID.split(':').length - 1]}`}>

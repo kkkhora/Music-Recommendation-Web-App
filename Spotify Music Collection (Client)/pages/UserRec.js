@@ -6,6 +6,7 @@ import { useState} from 'react';
 import Axios from 'axios';
 // import { use } from '../../project_server_client/server/server';
 // import LikeButton from '../../project_server_client/client/src/pages/LikeButton';
+import ReactPaginate from 'react-paginate';
 
 const PageHeaderText =
 {
@@ -27,6 +28,7 @@ class UserRec extends React.Component {
 
         this.userLike = this.userLike.bind(this);
         this.userDislike = this.userDislike.bind(this);
+        
         // console.log(props.router.query)
       //   this.songOnChange = this.songOnChange.bind(this);
       //   this.goToSearch = this.goToSearch.bind(this)
@@ -44,7 +46,6 @@ class UserRec extends React.Component {
         });
 
     }
-
     // setUsername = () => {
     //     const un = localStorage.getItem("username");
     //     return un;
@@ -52,25 +53,53 @@ class UserRec extends React.Component {
 
     userLike = (userID, songID) => {
 
-        // if (!window.localStorage.getItem("username")) {
-        //     alert("Please log in first!");
-        //     return;
-        // }
+        if (!window.localStorage.getItem("username")) {
+            alert("Please log in first!");
+            return;
+        }
+        else {
+            fetch(`http://localhost:3001/like/${userID}/${songID}`, {
+                method: 'GET'
+              })
+                .then(res => res.json())
+                .then(res => {
+                  //res is {status: "success"} if server -> db is sucessful
+                  if (res.status === "success") {
+                    alert("Thank you for liking it!");
+                  } else {
+                    alert("Error!");
+                  }
+                })
+                .catch(err => console.log(err));
+                window.location.reload(false);
+        }
 
-        fetch(`http://localhost:3001/like/${userID}/${songID}`, {
-            method: 'GET'
-          })
-            .then(res => res.json())
-            .then(res => {
-              //res is {status: "success"} if server -> db is sucessful
-              if (res.status === "success") {
-                alert("Thank you for liking it!");
-              } else {
-                alert("Error!");
-              }
-            })
-            .catch(err => console.log(err));
-            window.location.reload(false);
+
+    }
+
+    
+    handlepageChange = ({selected}) => {
+        var page=selected + 1
+        filterParams( page)
+        console.log(selected)
+    };
+
+    
+    filterParams = async () => {
+        if (location.search.indexOf('?') !== -1) {
+            let params = {}
+            let newarr = location.search.split('?')[1].split('&')
+            newarr.forEach(i => {
+                let key = i.split('=')[0]
+                params[key] = i.split('=')[1]
+            });
+            const { userid } = params
+            let { results,count } = await getsearch_genre(userid)
+            console.log(results);
+            setMusicData(results)
+            setcount(count)
+        }
+
     }
 
     userDislike = (userID, songID) => {
@@ -78,22 +107,24 @@ class UserRec extends React.Component {
             alert("Please log in first!");
             return;
         }
+        else {
+            fetch(`http://localhost:3001/dislike/${userID}/${songID}`, {
+                method: 'GET'
+              })
+                .then(res => res.json())
+                .then(res => {
+                  //res is {status: "success"} if server -> db is sucessful
+                  if (res.status === "success") {
+                    alert("Sorry you don't like it!");
+                  } else {
+                    alert("Error!");
+                  }
+                })
+                .catch(err => console.log(err));
+                console.log(songID);
+                window.location.reload(false);
+        }
 
-        fetch(`http://localhost:3001/dislike/${userID}/${songID}`, {
-            method: 'GET'
-          })
-            .then(res => res.json())
-            .then(res => {
-              //res is {status: "success"} if server -> db is sucessful
-              if (res.status === "success") {
-                alert("Sorry you don't like it!");
-              } else {
-                alert("Error!");
-              }
-            })
-            .catch(err => console.log(err));
-            console.log(songID)
-            window.location.reload(false);
     }
     
 
@@ -155,6 +186,7 @@ class UserRec extends React.Component {
                                     ))
 
                                 }
+
                                 
                             </div>
                         </div>
@@ -206,6 +238,17 @@ class UserRec extends React.Component {
                                     ))
 
                                 }
+                        {/* <ReactPaginate
+                            previousLabel={"<<"}
+                            nextLabel={">>"}
+                            pageCount={Math.ceil(count / 10)}
+                            onPageChange={handlepageChange}
+                            containerClassName={"paginationBttns"}
+                            previousLinkClassName={"previousBttn"}
+                            nextLinkClassName={"nextBttn"}
+                            disabledClassName={"paginationDisabled"}
+                            activeClassName={"paginationActive"}
+                        /> */}
                                 
                             </div>
                         </div>

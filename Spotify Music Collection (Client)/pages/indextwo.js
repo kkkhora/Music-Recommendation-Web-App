@@ -1,4 +1,4 @@
-import Head from 'next/head';
+
 import BannerTwo from '../components/BannerTwo';
 import Searchbygenre from '../components/Searchbygenre';
 import SearchbyYear from '../components/SearchbyYear';

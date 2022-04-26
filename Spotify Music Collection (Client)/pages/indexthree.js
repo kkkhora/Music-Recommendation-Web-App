@@ -1,4 +1,4 @@
-import Head from 'next/head';
+
 import BannerThree from '../components/BannerThree';
 import SearchbyEmotion from '../components/SearchbyEmotion';
 

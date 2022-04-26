@@ -587,6 +587,20 @@ async function remove_like(req, res){
     });
 }
 
+async function getPlayList(req, res){
+    // if(req.query.user && !isNaN(req.query.user)){
+        connection.query(`SELECT D.Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
+        FROM  Display_results D 
+        where Song_ID in (select Song_ID from User_likes where username = '${req.query.user}')`, function(error, results, field){
+            if(error){
+                console.log(error)
+                res.json({error: error})
+            }else if(results){
+                res.json({results:results})
+            }
+        });
+    // }
+}
 
 
 //frontend: if playlist is not null, use userRec_features and userRec_year; if playlist is null {[]}, use userRec_random.
@@ -622,6 +636,7 @@ module.exports = {
     userRec_random,
     userRec_song,
     user_like,
-    remove_like
+    remove_like,
+    getPlaylist
     
 }

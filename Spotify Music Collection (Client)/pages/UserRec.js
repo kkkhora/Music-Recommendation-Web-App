@@ -50,7 +50,7 @@ class UserRec extends React.Component {
         //     return;
         // }
 
-        fetch(`http://localhost:8080/like/${userID}/${songID}`, {
+        fetch(`http://localhost:3001/like/${userID}/${songID}`, {
             method: 'GET'
           })
             .then(res => res.json())
@@ -72,7 +72,7 @@ class UserRec extends React.Component {
             return;
         }
 
-        fetch(`http://localhost:8080/dislike/${userID}/${songID}`, {
+        fetch(`http://localhost:3001/dislike/${userID}/${songID}`, {
             method: 'GET'
           })
             .then(res => res.json())

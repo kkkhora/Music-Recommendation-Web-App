@@ -134,7 +134,7 @@ class UserRec extends React.Component {
                                                         <button id = 'button' onClick = {() => this.userDislike(this.state.username, String(item.Song_ID))}> Unlike </button> 
                                                         <a target='_blank' href={`https://open.spotify.com/track/${item.Song_ID.slice(-22)}`}>
 
-                                                    <img src="http://localhost:3000/assets/images/logo/spotify_logo.png" alt="Spotify Logo" width="50px" height="50px" />
+                                                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/74/Spotify_App_Logo.svg" alt="Spotify Logo" width="50px" height="50px" />
                                                 </a>
                                                 <a>
 
@@ -185,7 +185,7 @@ class UserRec extends React.Component {
                                                         <button id = 'button' onClick = {() => this.userLike(this.state.username, String(item.Song_ID))}> Like </button> 
                                                         <a target='_blank' href={`https://open.spotify.com/track/${item.Song_ID.slice(-22)}`}>
 
-                                                    <img src="http://localhost:3000/assets/images/logo/spotify_logo.png" alt="Spotify Logo" width="50px" height="50px" />
+                                                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/74/Spotify_App_Logo.svg" alt="Spotify Logo" width="50px" height="50px" />
                                                 </a>
                                                 <a>
 

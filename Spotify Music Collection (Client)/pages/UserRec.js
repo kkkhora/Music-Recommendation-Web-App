@@ -40,7 +40,8 @@ class UserRec extends React.Component {
         this.setState({username: window.localStorage.getItem("username")});
         getPlaylist(this.state.username).then(res => {
             this.setState({ playList: res.results })
-        })
+        });
+        console.log(this.state.username);
     }
 
     userLike = (userID, songID) => {

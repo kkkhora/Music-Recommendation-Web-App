@@ -637,6 +637,6 @@ module.exports = {
     userRec_song,
     user_like,
     remove_like,
-    getPlaylist
+    getPlayList
     
 }

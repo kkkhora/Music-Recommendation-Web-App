@@ -34,6 +34,12 @@ const Banner = () => {
                                     </a>
                                     </Link>
 
+                                    <Link href="/UserRec">
+                                    <a className="default-btn move-top"><span>Guess what you like</span>
+                                    </a>
+                                    </Link>
+
+
                                 </div>
                             </div>
                         </div>

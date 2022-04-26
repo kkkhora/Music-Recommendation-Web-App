@@ -32,6 +32,26 @@ const song = () => {
         }
 
     }
+
+    const userLike = (userID, songID) => {
+
+
+        fetch(`http://localhost:3001/like/${userID}/${songID}`, {
+            method: 'GET'
+          })
+            .then(res => res.json())
+            .then(res => {
+              //res is {status: "success"} if server -> db is sucessful
+              if (res.status === "success") {
+                alert("Thank you for liking it!");
+              } else {
+                alert("Error!");
+              }
+            })
+            .catch(err => console.log(err));
+            window.location.reload(false);
+    }
+
     const handlepageChange = ({selected}) => {
         var page=selected + 1
         filterParams( page)
@@ -87,6 +107,7 @@ const song = () => {
                                     <th scope="col">Release Year </th>
                                     <th scope="col">Genre </th>
                                     <th scope="col">Listen on Spotify</th>
+                                    <th scope="col">Like</th>
                                 </tr>
                             </thead>
                             <tbody >
@@ -125,6 +146,9 @@ const song = () => {
                                               <a  target='_blank' href={`https://open.spotify.com/track/${item.Song_ID.split(':')[item.Song_ID.split(':').length-1]}`}>
                                               <img src="http://localhost:3000/assets/images/logo/spotify_logo3.png" alt="Spotify Logo" />
                                             </a></td>
+                                            <td className="rank-assets">
+                                            <img src="http://localhost:3000/assets/images/logo/dislike_button.png"  id = 'button' onClick = {() => userLike(window.localStorage.getItem("username"), String(item.Song_ID))}/>
+                                            </td>
 
 
                                         </tr>

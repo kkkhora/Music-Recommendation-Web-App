@@ -1,9 +1,7 @@
 import PageHeader from '../components/PageHaeder';
-import {getSong} from '../pages/fetcher';
-import { getPlaylist } from '../../project_server_client/client/src/fetcher';
+import { getSong } from './fetcher';
+import { getPlayList } from './fetcher';
 import React , {useEffect} from "react";
-import { useState} from 'react';
-import Axios from 'axios';
 // import { use } from '../../project_server_client/server/server';
 // import LikeButton from '../../project_server_client/client/src/pages/LikeButton';
 
@@ -22,7 +20,7 @@ class UserRec extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            username: window.localStorage.getItem("username"),
+            username:window.localStorage.getItem("username"),
             songList:[],
             playList:[]
         };

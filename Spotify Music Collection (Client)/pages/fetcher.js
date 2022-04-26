@@ -35,8 +35,8 @@ const getsearch_genre = async (genre,page=1, pagesize=10) => {
     return res.json()
 }
 
-async function getSong() {
-    var res = await fetch(`http://${config.server_host}:${config.server_port}/userRec/song?user=mruan`, {
+async function getSong(userID) {
+    var res = await fetch(`http://${config.server_host}:${config.server_port}/userRec/song?user=${userID}`, {
         method: 'GET',
     })
     return res.json()
@@ -60,6 +60,5 @@ export {
     getsearch_song,
     getsearch_genre,
     getSong,
-    likeSong,
     getPlaylist
 }

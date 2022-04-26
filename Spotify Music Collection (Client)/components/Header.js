@@ -72,7 +72,7 @@ const Header = () => {
                             
                             <li className="header__nav-item">
                                 <a className="header__nav-link" href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false" data-bs-offset="0,10"><SubscriptionsIcon/>Favors and Recommend</a>
+                                    aria-haspopup="true" aria-expanded="false" data-bs-offset="0,10"><SubscriptionsIcon/>Favors & Recommend</a>
 
                                 <ul className="dropdown-menu header__nav-menu">
                                     <li>

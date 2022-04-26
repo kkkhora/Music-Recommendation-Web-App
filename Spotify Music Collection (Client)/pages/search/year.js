@@ -106,6 +106,7 @@ const song = () => {
                                     <th scope="col">Artist</th>
                                     <th scope="col">Release Year </th>
                                     <th scope="col">Genre </th>
+                                    <th scope="col">Add to Playlist</th>
                                     <th scope="col">Listen on Spotify</th>
                                     <th scope="col">Like</th>
                                 </tr>
@@ -141,7 +142,9 @@ const song = () => {
                                             </td>
                                             <td className="rank-owner" style={{ width: 100 }}>{item.Album_year}</td>
                                             <td className="rank-assets" style={{ width: 100 }}>{item.Song_genre}</td>
-                                            {/* <td className="rank-assets" style={{ width: 100 }}>{item.Song_ID}</td> */}
+                                            <td className="rank-assets">
+                                                    <img src="http://localhost:3000/assets/images/logo/likes-button.png" alt="Likes" />
+                                               </td>
                                             <td className="rank-assets"> 
                                               <a  target='_blank' href={`https://open.spotify.com/track/${item.Song_ID.split(':')[item.Song_ID.split(':').length-1]}`}>
                                               <img src="http://localhost:3000/assets/images/logo/spotify_logo3.png" alt="Spotify Logo" />

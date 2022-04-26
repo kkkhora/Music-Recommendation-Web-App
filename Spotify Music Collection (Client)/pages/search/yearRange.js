@@ -83,6 +83,7 @@ const SearchResult = () => {
                                     <th scope="col">Artist</th>
                                     <th scope="col">Release Year </th>
                                     <th scope="col">Genre </th>
+                                    <th scope="col">Add to Playlist</th>
                                     <th scope="col">Listen on Spotify</th>
                                 </tr>
                             </thead>
@@ -125,6 +126,9 @@ const SearchResult = () => {
                                                     {item.Song_genre}
                                                 </div>
                                             </td>
+                                            <td className="rank-assets">
+                                                    <img src="http://localhost:3000/assets/images/logo/likes-button.png" alt="Likes" />
+                                               </td>
                                             <td className="rank-assets">
                                                 <a target='_blank' href={`https://open.spotify.com/track/${item.Song_ID.split(':')[item.Song_ID.split(':').length - 1]}`}>
                                                     <img src="http://localhost:3000/assets/images/logo/spotify_logo3.png" alt="Spotify Logo" />

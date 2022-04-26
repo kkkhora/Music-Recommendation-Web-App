@@ -14,8 +14,6 @@ const PageHeaderText =
 };
 
 
-// const username = "mruan";
-
 
 
 class UserRec extends React.Component {

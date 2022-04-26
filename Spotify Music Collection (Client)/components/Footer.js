@@ -93,8 +93,7 @@ const Footer = () => {
             </div>
             <div className="footer-bottom">
                 <div className="container">
-                    <p className="text-center py-4 mb-0">All rights reserved &copy; Anftiz || Design By: <a
-                            href="https://themeforest.net/user/labartisan/portfolio">Labartisan</a>
+                    <p className="text-center py-4 mb-0"> Design By: Team 404 NOT FOUND
                     </p>
                 </div>
             </div>

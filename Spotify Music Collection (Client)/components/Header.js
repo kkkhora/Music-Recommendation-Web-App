@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import SearchIcon from '@mui/icons-material/Search';
+import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 
 const Header = () => {
     const[username, setUsername] = useState(0);
@@ -47,7 +49,7 @@ const Header = () => {
                         <ul className="header__nav mb-0">
                             <li className="header__nav-item">
                                 <a className="header__nav-link" href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false" data-bs-offset="0,10">Find Songs</a>
+                                    aria-haspopup="true" aria-expanded="false" data-bs-offset="0,10"><SearchIcon/>Search </a>
 
                                 <ul className="dropdown-menu header__nav-menu">
                                     <li>
@@ -70,7 +72,7 @@ const Header = () => {
                             
                             <li className="header__nav-item">
                                 <a className="header__nav-link" href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false" data-bs-offset="0,10">Favorites and Recs</a>
+                                    aria-haspopup="true" aria-expanded="false" data-bs-offset="0,10"><SubscriptionsIcon/>Favors and Recommend</a>
 
                                 <ul className="dropdown-menu header__nav-menu">
                                     <li>

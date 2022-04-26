@@ -38,7 +38,21 @@ const SearchResult = () => {
         console.log(selected)
     };
 
+    const userLike = (userID, songID) => {
+        fetch(`http://localhost:3001/check/${userID}/${songID}`).then(res => {
+            return res.json();
+        }).then((data) => {
+            
+            if(data.status == 'success' ){
+                alert("Thank you for liking this song!");
+            }
+            if(data.status == 'fail' ){
+                alert("You already liked this song!");
+            }   
+        }
+        )
 
+    }
     useEffect(() => {
         filterParams()
     }, [])
@@ -132,7 +146,7 @@ const SearchResult = () => {
                                                 </div>
                                             </td>
                                             <td className="rank-assets">
-                                                    <img src="http://localhost:3000/assets/images/logo/likes-button.png" alt="Likes" />
+                                                    <img src="http://localhost:3000/assets/images/logo/likes-button.png" id = 'button' onClick = {() => userLike(window.localStorage.getItem("username"), String(item.Song_ID))} alt="Likes" />
                                                </td>
                                             <td className="rank-assets">
                                                 <a target='_blank' href={`https://open.spotify.com/track/${item.Song_ID.split(':')[item.Song_ID.split(':').length - 1]}`}>

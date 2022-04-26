@@ -555,14 +555,13 @@ async function check_like(req, res) {
                 if (err) console.log("Insert error: ", err);
                 else {
                     res.json({
-                        name: username,
-                        query_status: 'success'
+                        status: 'success'
                     });
                 }
             });
         } else {
             res.json({
-                query_status: 'fail'
+                status: 'fail'
             });
             console.log("You already liked this song!");
         }

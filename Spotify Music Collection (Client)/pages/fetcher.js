@@ -1,3 +1,4 @@
+import { Axios } from 'axios'
 import config from '../config.json'
 
 const getsearch_year = async (year,page=1, pagesize=10) => {
@@ -50,12 +51,6 @@ async function getPlaylist(userID) {
     return res.json()
 }
 
-async function checkLike(userID, songID) {
-    var res = await fetch(`http://${config.server_host}:${config.server_port}/check?username=${userID}&?songID=${songID}`, {
-        method: 'GET',
-    })
-    return res.json()
-}
 
 
 
@@ -67,6 +62,5 @@ export {
     getsearch_song,
     getsearch_genre,
     getSong,
-    getPlaylist,
-    checkLike
+    getPlaylist
 }

@@ -35,6 +35,7 @@ class country extends React.Component {
         console.log(selected)
     };
 
+    
     getSearchCountry(){
       fetch(`http://localhost:3001/search/country?countryCode=${this.state.countryCode}`, {
         method: "GET",
@@ -53,7 +54,21 @@ class country extends React.Component {
     //   });
     // }
     
+    userLike = (userID, songID) => {
+        fetch(`http://localhost:3001/check/${userID}/${songID}`).then(res => {
+            return res.json();
+        }).then((data) => {
+            
+            if(data.status == 'success' ){
+                alert("Thank you for liking this song!");
+            }
+            if(data.status == 'fail' ){
+                alert("You already liked this song!");
+            }   
+        }
+        )
 
+    }
     render() {
   
       return (
@@ -145,7 +160,7 @@ class country extends React.Component {
                                     </div>
                                         </td>
                                     <td className="rank-assets">
-                                                    <img src="http://localhost:3000/assets/images/logo/likes-button.png" alt="Likes" />
+                                                    <img src="http://localhost:3000/assets/images/logo/likes-button.png" id = 'button' onClick = {() => this.userLike(window.localStorage.getItem("username"), String(item.Song_ID))} alt="Likes" />
                                             </td>
                                     <td className="rank-assets">
                                                 <a target='_blank' href={`https://open.spotify.com/track/${item.Song_ID.split(':')[item.Song_ID.split(':').length - 1]}`}>

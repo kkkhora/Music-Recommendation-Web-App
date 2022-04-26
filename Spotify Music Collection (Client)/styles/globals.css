@@ -551,15 +551,15 @@ ol {
   font-weight: 700;
 }
 
-.blog-section .post-item-inner .blog-footer .blog-comment, .page-header-section.style-1 .page-header-content .page-header-inner .breadcrumb li.active {
+ .page-header-section.style-1 .page-header-content .page-header-inner .breadcrumb li.active {
   font-weight: 400;
 }
 
-.variation-items, .explore-section .section-header, .seller-section .seller-wrapper, .page-header-section.style-1 .page-header-content .page-header-inner .breadcrumb, .header__search button, .widget.widget-tags ul.widget-wrapper, .explore-category .excat-item a, .paginations ul li a, .wallet-tab {
+.variation-items, .explore-section .section-header, .page-header-section.style-1 .page-header-content .page-header-inner .breadcrumb, .header__search button, .widget.widget-tags ul.widget-wrapper, .explore-category .excat-item a, .paginations ul li a, .wallet-tab {
   justify-content: center;
 }
 
-.comments .comment-list .comment .com-content .com-title, .blog-section .main-blog .blog-wrapper .post-item .tags-section, .blog-section .post-item-inner .blog-footer, .crypto-page, .header__content, .seller-item .seller-inner, .section-header {
+.comments .comment-list .comment .com-content .com-title, .header__content,  .section-header {
   justify-content: space-between;
 }
 
@@ -575,14 +575,11 @@ ol {
   align-items: center;
 }
 
-.blog-section .main-blog .blog-wrapper .post-item.video-post .post-item-inner .post-thumb .embed-responsive, .blog-section .post-item-inner .post-content .meta, .blog-section .post-item-inner .post-thumb a img, .blog-section .post-item-inner .post-thumb a, .item-details-countdown .item-countdown-list li .days,
-.item-details-countdown .item-countdown-list li .hours,
-.item-details-countdown .item-countdown-list li .minutes,
-.item-details-countdown .item-countdown-list li .seconds, .item-desc-part .item-desc-thumb img, .sponsor-section .sponsor-img, .header__btn, .header, .widget.shop-widget .widget-wrapper .shop-menu li a {
+.header__btn, .header, .widget.shop-widget .widget-wrapper .shop-menu li a {
   display: block;
 }
 
-.comments .comment-list .comment .com-content .com-title .com-title-meta span, .blog-section .main-blog .blog-wrapper .post-item .tags-section .social-link-list li a, .blog-section .main-blog .blog-wrapper .post-item .tags-section .tags li a, .blog-section .main-blog .blog-wrapper .post-item .tags-section .tags li span i, .account-bottom .social-media li a, .item-desc-part .item-desc-content .bids-tab span, .view-all-btn span, .header__action--profile .dropdown-toggle span:nth-of-type(1), .preloader .preloader-inner .preloader-icon span, .preloader .preloader-inner .preloader-icon, .custom-upload, .nft-item-bottom .nft-content .nft-bid, .nft-item.style-2 .nft-content .author-thumb, .nft-item .nft-item-top .more-part .dropstart > a i, .nft-item .nft-item-top .more-part .dropstart > a, .default-btn {
+.comments .comment-list .comment .com-content .com-title .com-title-meta span, .item-desc-part .item-desc-content .bids-tab span, .view-all-btn span, .header__action--profile .dropdown-toggle span:nth-of-type(1), .preloader .preloader-inner .preloader-icon span, .preloader .preloader-inner .preloader-icon, .custom-upload, .default-btn {
   display: inline-block;
 }
 
@@ -1761,31 +1758,7 @@ aside {
   text-transform: capitalize;
   font-size: 1.125rem;
 }
-.nft-search-input input {
-  background: #130506;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  color: #fff;
-  padding-right: 45px !important;
-}
-.nft-search-input input:focus {
-  border-color: rgba(255, 48, 0, 0.4);
-  box-shadow: none;
-  background-color: #130506;
-  color: #fff;
-}
-.nft-search-input button {
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  outline: none;
-  box-shadow: none;
-}
-.nft-search-input button i {
-  font-size: 1.2rem;
-  color: #fff;
-}
+
 
 .widget {
   padding: 25px;
@@ -2188,23 +2161,6 @@ aside {
   border-color: rgba(0, 0, 0, 0.1);
 }
 
-.wallet-btn {
-  padding-left: 1rem;
-}
-@media (min-width: 768px) {
-  .wallet-btn {
-    padding-left: 1.5rem;
-  }
-}
-.wallet-btn a {
-  display: inline-flex;
-}
-.wallet-btn a span i {
-  font-size: 1.7rem;
-  background: linear-gradient(315deg, #fb8c00 0%, #e53935 74%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 
 .header__action-btn {
   display: flex;

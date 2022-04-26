@@ -34,11 +34,11 @@ class UserRec extends React.Component {
       //   this.goToSearch = this.goToSearch.bind(this)
       }
       componentDidMount() {
-        getSong(username).then(res => {
+        getSong(this.state.username).then(res => {
             this.setState({ songList: res.results })
         });
 
-        getPlaylist(username).then(res => {
+        getPlaylist(this.state.username).then(res => {
             this.setState({ playList: res.results })
         })
     }
@@ -131,7 +131,7 @@ class UserRec extends React.Component {
                                                         {/* </Link> */}
                                                         </p>
                                                         <p>Released: {`${item.Album_year}`}</p>
-                                                        <button id = 'button' onClick = {() => this.userDislike(username, String(item.Song_ID))}> Unlike </button> 
+                                                        <button id = 'button' onClick = {() => this.userDislike(this.state.username, String(item.Song_ID))}> Unlike </button> 
                                                         <a target='_blank' href={`https://open.spotify.com/track/${item.Song_ID.slice(-22)}`}>
 
                                                     <img src="http://localhost:3000/assets/images/logo/spotify_logo.png" alt="Spotify Logo" width="50px" height="50px" />
@@ -182,7 +182,7 @@ class UserRec extends React.Component {
                                                         {/* </Link> */}
                                                         </p>
                                                         <p>Released: {`${item.Album_year}`}</p>
-                                                        <button id = 'button' onClick = {() => this.userLike(username, String(item.Song_ID))}> Like </button> 
+                                                        <button id = 'button' onClick = {() => this.userLike(this.state.username, String(item.Song_ID))}> Like </button> 
                                                         <a target='_blank' href={`https://open.spotify.com/track/${item.Song_ID.slice(-22)}`}>
 
                                                     <img src="http://localhost:3000/assets/images/logo/spotify_logo.png" alt="Spotify Logo" width="50px" height="50px" />

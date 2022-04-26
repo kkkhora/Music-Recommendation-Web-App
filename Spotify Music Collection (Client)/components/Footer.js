@@ -4,6 +4,20 @@ const Footer = () => {
             <footer className="footer-section">
             <div className="footer-top" style={{backgroundImage:"url('assets/images/footer/footer_logo.png')"}}>
                 <div className="footer-links padding-top padding-bottom">
+                <div className="container">
+                        <div className="row g-5">
+                            <div className="col-lg-3 col-md-6">
+                                <div className="footer-link-item">
+                                    <h5>About Us</h5>
+                                    <ul className="footer-link-list">
+                                        <li><a className="footer-link">Team: 404 NOT FOUND</a></li>
+                                        <li><a href="/activity" className="footer-link">Developers Details</a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="footer-bottom">

@@ -573,7 +573,7 @@ if(req.query.user && !isNaN(req.query.user)){
 
 async function remove_like(req, res){
     var username = req.params.username;
-    var songID = req.params.song;
+    var songID = req.params.songID;
     connection.query(`
     DELETE FROM User_likes
     WHERE username = "${username}" AND Song_ID = "${songID}"

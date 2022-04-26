@@ -34,19 +34,27 @@ class UserRec extends React.Component {
       //   this.goToSearch = this.goToSearch.bind(this)
       }
       componentDidMount() {
-        getSong(this.state.username).then(res => {
+        console.log(window.localStorage.getItem("username"));
+        getSong(window.localStorage.getItem("username")).then(res => {
             this.setState({ songList: res.results })
         });
-        this.setState({username: window.localStorage.getItem("username")});
-        getPlaylist(this.state.username).then(res => {
+
+        console.log(this.state.username)
+
+        getPlaylist(window.localStorage.getItem("username")).then(res => {
             this.setState({ playList: res.results })
         });
-        console.log(this.state.username);
+
+    }
+
+    setUsername = () => {
+        const un = localStorage.getItem("username");
+        return un;
     }
 
     userLike = (userID, songID) => {
 
-        if (!this.state.username) {
+        if (!window.localStorage.getItem("username")) {
             alert("Please log in first!");
             return;
         }
@@ -68,7 +76,7 @@ class UserRec extends React.Component {
     }
 
     userDislike = (userID, songID) => {
-        if (!this.state.username) {
+        if (!window.localStorage.getItem("username")) {
             alert("Please log in first!");
             return;
         }
@@ -87,7 +95,7 @@ class UserRec extends React.Component {
             })
             .catch(err => console.log(err));
             console.log(songID)
-    
+            window.location.reload(false);
     }
     
 
@@ -133,7 +141,7 @@ class UserRec extends React.Component {
                                                         {/* </Link> */}
                                                         </p>
                                                         <p>Released: {`${item.Album_year}`}</p>
-                                                        <button id = 'button' onClick = {() => this.userDislike(this.state.username, String(item.Song_ID))}> Unlike </button> 
+                                                        <button id = 'button' onClick = {() => this.userDislike(window.localStorage.getItem("username"), String(item.Song_ID))}> Unlike </button> 
                                                         <a target='_blank' href={`https://open.spotify.com/track/${item.Song_ID.slice(-22)}`}>
 
                                                     <img src="https://upload.wikimedia.org/wikipedia/commons/7/74/Spotify_App_Logo.svg" alt="Spotify Logo" width="40px" height="40px" />
@@ -184,7 +192,7 @@ class UserRec extends React.Component {
                                                         {/* </Link> */}
                                                         </p>
                                                         <p>Released: {`${item.Album_year}`}</p>
-                                                        <button id = 'button' onClick = {() => this.userLike(this.state.username, String(item.Song_ID))}> Like </button> 
+                                                        <button id = 'button' onClick = {() => this.userLike(window.localStorage.getItem("username"), String(item.Song_ID))}> Like </button> 
                                                         <a target='_blank' href={`https://open.spotify.com/track/${item.Song_ID.slice(-22)}`}>
 
                                                     <img src="https://upload.wikimedia.org/wikipedia/commons/7/74/Spotify_App_Logo.svg" alt="Spotify Logo" width="40px" height="40px" />

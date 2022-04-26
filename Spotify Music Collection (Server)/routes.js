@@ -556,13 +556,13 @@ async function check_like(req, res) {
                 else {
                     res.json({
                         name: username,
-                        status: 'success'
+                        query_status: 'success'
                     });
                 }
             });
         } else {
             res.json({
-                status: 'fail'
+                query_status: 'fail'
             });
             console.log("You already liked this song!");
         }

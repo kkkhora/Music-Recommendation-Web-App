@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { getsearch_song } from '../fetcher';
 import Link from "next/link";
 import ReactPaginate from 'react-paginate';
+import { Axios } from 'axios';
 
 const PageHeaderText =
 {
@@ -35,10 +36,10 @@ const song = () => {
     const userLike = (userID, songID) => {
         fetch(`http://localhost:3001/check/${userID}/${songID}`).then(response => {
             console.log(response);
-            if(response.status == 'success' ){
+            if(response.query_status == 'success' ){
                 alert("Thank you for liking this song!");
             }
-            if(response.status == 'fail' ){
+            if(response.query_status == 'fail' ){
                 alert("You already liked this song!");
             }
         })

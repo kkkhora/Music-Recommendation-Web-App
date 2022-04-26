@@ -17,7 +17,7 @@ const Banner = () => {
                             <div className="banner-content text-center">
                                 <h2><span className="gradient-text-bluegreen">Discover</span>, Select
                                     And <span className="gradient-text-pink">Listen</span> to Extraordinary <span className="gradient-text-bluepink">Songs</span> </h2>
-                                <p>Digital music platforms that gives you access to thousand of songs from creators all over the world.</p>
+                                <p>Digital music platforms that gives you access to thousands of songs from creators all over the world.</p>
                                 <div className="banner-btns d-flex flex-wrap justify-content-center">
                                     <Link href="/indextwo">
                                     <a className="default-btn move-top"><span>Pick Songs By Song Info</span> 

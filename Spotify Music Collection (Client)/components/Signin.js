@@ -1,12 +1,23 @@
 import Link from 'next/link';
 import Axios from 'axios';
-import { useRef, useState } from 'react';
+import { useRef, useEffect } from 'react';
 
 const Signin = () => {
 
     //add variables to store user input
     const username = useRef();
     const password = useRef();
+
+    useEffect(() => {
+        let storage = window.localStorage;
+        if (storage.getItem("username") !== ''){
+            alert("You have already logged in!")
+            window.location= '/'
+        }
+
+    // Run useEffect only once
+    // Read https://css-tricks.com/run-useeffect-only-once/
+    }, [])
 
     const login = () => {
         Axios.post('http://localhost:3001/login', {
@@ -15,12 +26,16 @@ const Signin = () => {
         }).then(response => {
             console.log(response);
             if(response.data.status == 'success' ){
+                alert("Login success. Click 'OK' to proceed.");
                 let storage = window.localStorage;
                 storage.setItem("username", username.current.value);
                 window.location = '/'
-            }else{
-                let storage = window.localStorage;
-                storage.setItem("username", "");
+            }
+            if(response.data.status == 'unexist' ){
+                alert("User unexist. Please sign up first!");
+            }
+            if(response.data.status == 'fail'){
+                alert("Wrong password!");
             }
         })
         // console.log("username", username.current.value)

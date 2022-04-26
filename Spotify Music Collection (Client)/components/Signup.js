@@ -16,6 +16,13 @@ const Signup = () => {
             confirmPassword: confirmPassword.current.value
         }).then(response => {
             console.log(response);
+            if(response.data.status == 'success' ){
+                alert("Account created. Log in now.");
+                window.location = '/signin'
+            }
+            if(response.data.status == 'fail' ){
+                alert("Account already exist. Please use other usernames.");
+            }
         })
         // console.log("username", username.current.value)
         // console.log("password", password.current.value)

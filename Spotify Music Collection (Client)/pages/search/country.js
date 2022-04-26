@@ -91,7 +91,9 @@ class country extends React.Component {
                 </div>
             </div>
             <div className="ranking-wrapper table-responsive">
-                <table className="table table-hover rank-table">
+            <table className="table table-hover rank-table" style={{
+                            'table-layout': 'fixed',
+                        }}>
                     <thead>
                         <tr>
                             <th scope="col">Item Number</th>
@@ -116,7 +118,7 @@ class country extends React.Component {
                                                 </a>
 
                                             </div>
-                                            <div className="rank-col-content">
+                                            <div className="rank-col-content" style={{ width: 100 }}>
                                                 <a href="#">{`${item.Song_name}`}</a>
                                             </div>
                                         </div>
@@ -126,13 +128,21 @@ class country extends React.Component {
                                             <div className="rank-vol-thumb">
 
                                             </div>
-                                            <div className="rank-vol-content">
+                                            <div className="rank-vol-content" style={{ width: 100 }}>
                                                 {`${item.Artist_name}`}
                                             </div>
                                         </div>
                                     </td>
-                                    <td className="rank-owner">{`${item.Album_year}`}</td>
-                                    <td className="rank-assets">{`${item.Song_genre}`}</td>
+                                    <td className="rank-owner" style={{ width: 100 }}>{`${item.Album_year}`}</td>
+                                    <td className="rank-assets">
+                                    <div className="rank-vol-content" style={{
+                                                    width: 200, 'white-space': 'nowrap',
+                                                    overflow: 'hidden',
+                                                    'text-overflow': 'ellipsis'
+                                                }}>
+                                        {`${item.Song_genre}`}
+                                    </div>
+                                        </td>
                                     <td className="rank-assets">
                                                 <a target='_blank' href={`https://open.spotify.com/track/${item.Song_ID.split(':')[item.Song_ID.split(':').length - 1]}`}>
                                                     <img src="http://localhost:3000/assets/images/logo/spotify_logo3.png" alt="Spotify Logo" />

@@ -124,12 +124,6 @@ const Header = () => {
                                 </div>
                             </div>
                         </div>
-
-                        <button className="menu-trigger header__btn" id="menu05">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </button>
                     </div>
                 </div>
             </header>

@@ -1,10 +1,9 @@
-import Collector from './common/Collector';
-import User from '../data/User/Users.json';
+
 import Link from 'next/link';
 import { getsearch_song, } from '../pages/fetcher'
 import { useState } from 'react';
 
-var TopCollector = User.slice(0,9);
+
 
 const SearchbyName = () => {
 

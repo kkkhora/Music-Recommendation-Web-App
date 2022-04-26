@@ -1,5 +1,5 @@
-import Collector from './common/Collector';
-import User from '../data/User/Users.json';
+
+
 import Link from 'next/link';
 import DiscreteSliderLabel4 from './Slider_others';
 import DiscreteSliderLabel3 from './Slider_Tempo';
@@ -13,7 +13,7 @@ import Explaintion7 from './Explaintion7';
 import Checkbox from './Checkbox';
 import { useState } from 'react';
 
-var TopCollector = User.slice(0, 9);
+
 
 
 const SearchbyEmotion = () => {

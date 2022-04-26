@@ -1,10 +1,10 @@
-import Collector from './common/Collector';
-import User from '../data/User/Users.json';
+
+
 import Link from 'next/link';
 import DiscreteSliderLabel from './Slider';
 import { useState } from 'react';
 
-var TopCollector = User.slice(0,9);
+
 
     
 const SearchbyYear = () => {

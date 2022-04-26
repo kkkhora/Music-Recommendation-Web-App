@@ -1,9 +1,7 @@
-import BannerSingle from './common/BannerSingle'
-import BannerImages from "../data/Banner/BannerImages.json";
+
 import Link from 'next/link';
 
-var BannerImageListOne = BannerImages.slice(0,12);
-var BannerImageListTwo = BannerImages.slice(11,24);
+
 
 const Banner = () => {
 

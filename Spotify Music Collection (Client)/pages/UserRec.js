@@ -45,10 +45,10 @@ class UserRec extends React.Component {
 
     userLike = (userID, songID) => {
 
-        // if (!this.state.username) {
-        //     alert("Please log in first!");
-        //     return;
-        // }
+        if (!this.state.username) {
+            alert("Please log in first!");
+            return;
+        }
 
         fetch(`http://localhost:3001/like/${userID}/${songID}`, {
             method: 'GET'

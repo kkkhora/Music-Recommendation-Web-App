@@ -97,11 +97,8 @@ class UserRec extends React.Component {
                                     <div className="section-header">
                                         <h3>Guess What You like</h3>
                                         <div className="header-content">
-                                            
-                                                <a
-                                                    className="default-btn style-2 small-btn move-right" onClick={() => window.location.reload(false)}>Refresh<RefreshIcon/>
+                                                <a className="default-btn style-2 small-btn move-right" onClick={() => window.location.reload(false)}>Refresh<RefreshIcon/>
                                                        </a>
-                                        
                                         </div>
                                     </div>
                                     <div className="activity-wrapper activity-loadmore">

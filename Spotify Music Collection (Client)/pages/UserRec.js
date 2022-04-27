@@ -2,6 +2,7 @@ import PageHeader from '../components/PageHaeder';
 import {getSong} from './fetcher';
 import { getPlaylist } from './fetcher';
 import React , {useEffect} from "react";
+import RefreshIcon from '@mui/icons-material/Refresh';
 import { useState} from 'react';
 import Axios from 'axios';
 // import { use } from '../../project_server_client/server/server';
@@ -150,6 +151,10 @@ class UserRec extends React.Component {
                     <div className="col-xl-12">
                         <div className="section-header">
                             <h3>Guess What You like</h3>
+                            <div className="header-content">
+                                                <a className="default-btn style-2 small-btn move-right" onClick={() => window.location.reload(false)}>Refresh<RefreshIcon/>
+                                                       </a>
+                                        </div>
                         </div>
                         <div className="activity-wrapper activity-loadmore">
                             <div className="row gy-3">

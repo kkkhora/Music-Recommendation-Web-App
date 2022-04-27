@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import SearchIcon from '@mui/icons-material/Search';
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
+import RecommendIcon from '@mui/icons-material/Recommend';
 
 const Header = () => {
     const [username, setUsername] = useState(0);
@@ -69,7 +70,12 @@ const Header = () => {
                                         </li>
                                     </ul>
                                 </li>
-
+                                <li className="header__nav-item">
+                                    <Link href="/UserRec">
+                                        <a className="header__nav-link" href="/UserRec" role="button" 
+                                            aria-haspopup="true" aria-expanded="false" data-bs-offset="0,10"><RecommendIcon/>Recommend</a>
+                                    </Link>
+                                </li>
                                 <li className="header__nav-item">
                                     <Link href="/playList">
                                         <a className="header__nav-link" href="/UserRec" role="button" 

@@ -518,6 +518,9 @@ ol {
   display: flex;
   flex-wrap: wrap;
 }
+.variation-items, .explore-section .section-header, .seller-section .seller-wrapper, .page-header-section.style-1 .page-header-content .page-header-inner .breadcrumb, .header__search button, .widget.widget-tags ul.widget-wrapper, .explore-category .excat-item a, .paginations ul li a, .wallet-tab {
+  justify-content: center;
+}
 
 .footer-link-item .footer-link-list .footer-link, .footer-top form, .blog-section .main-blog .blog-wrapper .post-item .tags-section .tags li span, .blog-section .main-blog .blog-wrapper .post-item.video-post .post-item-inner .post-thumb .embed-responsive, .blog-section .main-blog .blog-wrapper .post-item.post-slider .post-item-inner .post-thumb .blog-slider, .blog-section .main-blog .blog-wrapper .post-item .post-item-inner .post-content blockquote p, .error-section .section-wrapper .error-item .error-thumb, .or span, .or, .item-desc-part .item-desc-content .history-tab .item-histo-list .histo-item, .item-desc-part .item-desc-content .details-tab .other-info-list .item-other-info .item-info-title, .item-desc-part .item-desc-content .nav-tabs .nav-link, .help-item.style-2, .media-wrapper .tab-content .tab-pane .media-content .album .album-thumb, .media-wrapper .nav-tp-abs .nav-item .nav-link.active span, .media-wrapper .nav-tp-abs .nav-item .nav-link.active, .media-wrapper .nav-tp-abs .nav-item .nav-link span, .info-card .info-card-content .info-list li .info-name, .profile-details .profile-nav .nav-tabs .dropdown, .profile-details .profile-nav .nav-tabs .nav-link.active, .profile-details .profile-nav .nav-tabs .nav-link .item-number, .profile-section .member-profile .profile-item .profile-information .profile-pic, .profile-section .member-profile .profile-item .profile-cover, .banner-section.style-1 .banner-wrapper, .banner-section, .live-icon, .page-header-section.style-1 .page-header-content .page-header-inner .breadcrumb li a, .header__nav-menu a, .header__nav-link[data-bs-toggle=dropdown], .header__nav-item, .header__nav, .header__content, .select-wrapper.arrow-orange, .select-wrapper.arrow-blue, .widget.widget-search .search-wrapper, .scrollToTop i, .paginations ul li a, .custom-upload, .seller-icon, .veryfied, .nft-item-bottom .nft-thumb, .nft-item, .default-btn {
   position: relative;
@@ -583,7 +586,7 @@ ol {
   display: block;
 }
 
-.comments .comment-list .comment .com-content .com-title .com-title-meta span, .item-desc-part .item-desc-content .bids-tab span, .view-all-btn span, .header__action--profile .dropdown-toggle span:nth-of-type(1), .preloader .preloader-inner .preloader-icon span, .preloader .preloader-inner .preloader-icon, .custom-upload, .default-btn {
+.comments .comment-list .comment .com-content .com-title .com-title-meta span, .item-desc-part .item-desc-content .bids-tab span, .view-all-btn span, .header__action--profile .dropdown-toggle span:nth-of-type(1), .preloader .preloader-inner .preloader-icon span, .preloader .preloader-inner .preloader-icon, .custom-upload, .nft-item-bottom .nft-content .nft-bid, .nft-item.style-2 .nft-content .author-thumb, .nft-item .nft-item-top .more-part .dropstart > a i, .nft-item .nft-item-top .more-part .dropstart > a, .default-btn {
   display: inline-block;
 }
 

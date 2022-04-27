@@ -11,13 +11,13 @@ import ReactPaginate from 'react-paginate';
 const PageHeaderText =
 {
     "linkText":"Home",
-    "heading":"Song Recommendation"
+    "heading":"Playlist"
 };
 
 
 
 
-class UserRec extends React.Component {
+class playList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -56,7 +56,7 @@ class UserRec extends React.Component {
         this.setState({page: selected + 1})
         console.log(selected)
     };
-
+    
     userLike = (userID, songID) => {
 
         if (!window.localStorage.getItem("username")) {
@@ -70,6 +70,7 @@ class UserRec extends React.Component {
                 .then(res => res.json())
                 .then(res => {
                   //res is {status: "success"} if server -> db is sucessful
+                  console.log(res);
                   if (res.status === "success") {
                     alert("Thank you for liking it!");
                   } else {
@@ -84,11 +85,11 @@ class UserRec extends React.Component {
     }
 
     
-    handlepageChange = ({selected}) => {
-        var page=selected + 1
-        filterParams( page)
-        console.log(selected)
-    };
+    // handlepageChange = ({selected}) => {
+    //     var page=selected + 1
+    //     filterParams( page)
+    //     console.log(selected)
+    // };
 
     
     filterParams = async () => {
@@ -144,18 +145,17 @@ class UserRec extends React.Component {
 
             
         <div className="container">
-             
+             <div className="section-header">
+                <h3>Your Playlist</h3>
+                <div className="nft-filter d-flex flex-wrap justify-content-center gap-15">
 
-            <div className="section-wrapper">
-                <div className="row">
-                    <div className="col-xl-12">
-                        <div className="section-header">
-                            <h3>Guess What You like</h3>
-                        </div>
-                        <div className="activity-wrapper activity-loadmore">
+                </div>
+    
+            </div>
+            <div className="activity-wrapper activity-loadmore">
                             <div className="row gy-3">
                                 {
-                                   this.state.songList.slice((this.state.page - 1)*10, (this.state.page - 1)*10 + 10).map((item) =>(
+                                    this.state.playList.slice((this.state.page - 1)*10, (this.state.page - 1)*10 + 10).map((item) =>(
                                         <div className="col-12" key={item.id}>
                                             <div className="activity-item">
                                                 <div
@@ -177,9 +177,10 @@ class UserRec extends React.Component {
                                                         {/* </Link> */}
                                                         </p>
                                                         <p>Released: {`${item.Album_year}`}</p>
-                                                        <img src="http://localhost:3000/assets/images/logo/likes-button.png"  id = 'button' onClick = {() => this.userLike(window.localStorage.getItem("username"), String(item.Song_ID))}/>  
-                                                        <a target='_blank' href={`https://open.spotify.com/track/${item.Song_ID.slice(-22)}`}>
+                                                        <img src="http://localhost:3000/assets/images/logo/dislike_button.png"  id = 'button' onClick = {() => this.userDislike(window.localStorage.getItem("username"), String(item.Song_ID))}/>
                                                         &nbsp;&nbsp;&nbsp;
+                                                        <a target='_blank' href={`https://open.spotify.com/track/${item.Song_ID.slice(-22)}`}>
+
                                                     <img src="http://localhost:3000/assets/images/logo/spot_button.png" alt="Spotify Logo" />
                                                 </a>
                                                 <a>
@@ -189,11 +190,12 @@ class UserRec extends React.Component {
                                                     
                                                 </div>
                                             </div>
+                                            
                                         </div>
                                     ))
 
                                 }
-                        <ReactPaginate 
+                                <ReactPaginate 
               previousLabel={"<<"} 
               nextLabel={">>"} 
               pageCount={Math.ceil(this.state.playList.length / 10)} 
@@ -204,14 +206,11 @@ class UserRec extends React.Component {
               disabledClassName={"paginationDisabled"}
               activeClassName={"paginationActive"}
               />
-                                
+
                             </div>
                         </div>
-                    </div>
-                </div>
 
-            </div>
-        </div>
+                    </div>
     </section>
         
         </div>
@@ -219,4 +218,4 @@ class UserRec extends React.Component {
     }
 }
 
-export default UserRec;
+export default playList;

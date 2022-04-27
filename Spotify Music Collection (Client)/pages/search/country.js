@@ -3,12 +3,6 @@ import {withRouter} from 'next/router';
 import Link from "next/link";
 import ReactPaginate from 'react-paginate';
 
-// import { getSearchCountry } from '../fetcher'
-
-
-// const handlePageClick = (data) =>{
-//   console.log(data)
-// }
 
 class country extends React.Component {
 

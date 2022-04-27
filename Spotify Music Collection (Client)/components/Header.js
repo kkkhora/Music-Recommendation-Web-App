@@ -71,7 +71,7 @@ const Header = () => {
                                 </li>
 
                                 <li className="header__nav-item">
-                                    <Link href="/UserRec">
+                                    <Link href="/playList">
                                         <a className="header__nav-link" href="/UserRec" role="button" 
                                             aria-haspopup="true" aria-expanded="false" data-bs-offset="0,10"><SubscriptionsIcon />User Playlist</a>
                                     </Link>

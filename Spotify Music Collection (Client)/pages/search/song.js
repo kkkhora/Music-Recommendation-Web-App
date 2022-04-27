@@ -135,10 +135,8 @@ const song = () => {
                                             </td>
                                             <td className="rank-vol">
                                                 <div className="rank-vol-inner d-flex flex-wrap align-items-center">
-                                                    <div className="rank-vol-thumb">
-
-                                                    </div>
-                                                    <div className="rank-vol-content" style={{ width: 100 }}>
+                                                    
+                                                    <div className="rank-vol-content" style={{ width: 150 }}>
                                                         {`${item.Artist_name}`}
                                                     </div>
                                                 </div>
@@ -176,6 +174,7 @@ const song = () => {
                             nextLinkClassName={"nextBttn"}
                             disabledClassName={"paginationDisabled"}
                             activeClassName={"paginationActive"}
+                            
                         />
                       
                     </div>

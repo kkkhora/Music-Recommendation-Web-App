@@ -1,5 +1,5 @@
 import PageHeader from '../components/PageHaeder';
-import {getSong} from './fetcher';
+// import {getSong} from './fetcher';
 import { getPlaylist } from './fetcher';
 import React , {useEffect} from "react";
 import { useState} from 'react';
@@ -22,7 +22,7 @@ class playList extends React.Component {
         super(props)
         this.state = {
             username: null,
-            songList:[],
+            // songList:[],
             playList:[],
             page: 1
         };
@@ -37,15 +37,19 @@ class playList extends React.Component {
       }
       componentDidMount() {
         console.log(window.localStorage.getItem("username"));
-        getSong(window.localStorage.getItem("username")).then(res => {
-            this.setState({ songList: res.results })
-        });
+        // getSong(window.localStorage.getItem("username")).then(res => {
+        //     this.setState({ songList: res.results })
+        // });
 
         console.log(this.state.username)
-
-        getPlaylist(window.localStorage.getItem("username")).then(res => {
-            this.setState({ playList: res.results })
-        });
+        if(!window.localStorage.getItem("username")){
+            alert("Please log in first!")
+            return;
+        }else{
+            getPlaylist(window.localStorage.getItem("username")).then(res => {
+                this.setState({ playList: res.results })
+            });
+        }
 
     }
     // setUsername = () => {
@@ -72,7 +76,7 @@ class playList extends React.Component {
                   //res is {status: "success"} if server -> db is sucessful
                   console.log(res);
                   if (res.status === "success") {
-                    alert("Thank you for liking it!");
+                    alert("Song added to your playlist!");
                   } else {
                     alert("Error!");
                   }
@@ -122,13 +126,12 @@ class playList extends React.Component {
                 .then(res => {
                   //res is {status: "success"} if server -> db is sucessful
                   if (res.status === "success") {
-                    alert("Sorry you don't like it!");
+                    alert("Song removed from your playlist!");
                   } else {
                     alert("Error!");
                   }
                 })
                 .catch(err => console.log(err));
-                console.log(songID);
                 window.location.reload(false);
         }
 
@@ -156,7 +159,7 @@ class playList extends React.Component {
                             <div className="row gy-3">
                                 {
                                     this.state.playList.slice((this.state.page - 1)*10, (this.state.page - 1)*10 + 10).map((item) =>(
-                                        <div className="col-12" key={item.id}>
+                                        <div className="col-12" key={item.Song_ID}>
                                             <div className="activity-item">
                                                 <div
                                                     className="lab-inner d-flex flex-row-reverse align-items-center p-3 p-md-4">

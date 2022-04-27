@@ -583,7 +583,6 @@ async function userRec_song(req, res) {
     where D.Song_ID not in (select Song_ID from User_likes)
     and label in (select label from User_most_like)
     ORDER BY RAND()
-    limit 10
     `, function (error, results, field) {
             if (error) {
                 console.log(error)
@@ -598,7 +597,6 @@ async function userRec_song(req, res) {
         SELECT Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
         FROM Display_results
         ORDER BY RAND()
-        LIMIT 10
         `, function (error, results, field) {
             if (error) {
                 console.log(error)

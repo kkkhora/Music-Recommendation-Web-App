@@ -69,7 +69,7 @@ const countryCapitals = [{"CountryName":"Argentina","CapitalName":"Buenos Aires"
 {"CountryName":"Senegal","CapitalName":"Dakar","CapitalLatitude":"14.733333333333333","CapitalLongitude":"-17.633333","CountryCode":"SN","ContinentName":"Africa"},
 {"CountryName":"Turkey","CapitalName":"Ankara","CapitalLatitude":"39.93333333333333","CapitalLongitude":"32.866667","CountryCode":"TR","ContinentName":"Europe"},
 {"CountryName":"Ukraine","CapitalName":"Kyiv","CapitalLatitude":"50.43333333333333","CapitalLongitude":"30.516667","CountryCode":"UA","ContinentName":"Europe"},
-{"CountryName":"United States","CapitalName":"Washington","CapitalLatitude":"-77.000000","CapitalLongitude":"38.883333","CountryCode":"US","ContinentName":"America"},
+{"CountryName":"United States","CapitalName":"Washington","CapitalLatitude":"38.89","CapitalLongitude":"-77.000000","CountryCode":"US","ContinentName":"America"},
 {"CountryName":"Uruguay","CapitalName":"Montevideo","CapitalLatitude":"-34.85","CapitalLongitude":"-56.166667","CountryCode":"UY","ContinentName":"South America"},
 {"CountryName":"Saint Vincent and the Grenadines","CapitalName":"Kingstown","CapitalLatitude":"13.133333333333333","CapitalLongitude":"-61.216667","CountryCode":"VC","ContinentName":"Central America"},
 {"CountryName":"Venezuela","CapitalName":"Caracas","CapitalLatitude":"10.483333333333333","CapitalLongitude":"-66.866667","CountryCode":"VE","ContinentName":"South America"},

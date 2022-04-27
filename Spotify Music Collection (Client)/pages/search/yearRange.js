@@ -32,15 +32,19 @@ const SearchResult = () => {
 
     }
     const userLike = (userID, songID) => {
+        if (!window.localStorage.getItem("username")) {
+            alert("Please log in first!");
+            return;
+        }
         fetch(`http://localhost:3001/check/${userID}/${songID}`).then(res => {
             return res.json();
         }).then((data) => {
             
             if(data.status == 'success' ){
-                alert("Thank you for liking this song!");
+                alert("Song added to your playlist!");
             }
             if(data.status == 'fail' ){
-                alert("You already liked this song!");
+                alert("This song is already in your playlist!");
             }   
         }
         )

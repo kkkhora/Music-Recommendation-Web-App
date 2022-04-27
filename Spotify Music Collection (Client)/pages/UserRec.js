@@ -28,7 +28,7 @@ class UserRec extends React.Component {
         };
 
         this.userLike = this.userLike.bind(this);
-        this.userDislike = this.userDislike.bind(this);
+        // this.userDislike = this.userDislike.bind(this);
         this.pageOnChange = this.changePage.bind(this);
         
         // console.log(props.router.query)
@@ -58,28 +58,27 @@ class UserRec extends React.Component {
     };
 
     userLike = (userID, songID) => {
-
         if (!window.localStorage.getItem("username")) {
             alert("Please log in first!");
             return;
         }
         else {
-            Axios(`http://localhost:3001/like/${userID}/${songID}`, {
+            fetch(`http://localhost:3001/like/${userID}/${songID}`, {
                 method: 'GET'
               })
                 .then(res => res.json())
                 .then(res => {
                   //res is {status: "success"} if server -> db is sucessful
+                  console.log(res);
                   if (res.status === "success") {
-                    alert("Thank you for liking it!");
-                  } else {
-                    alert("Error!");
-                  }
+                    alert("Song added to your playlist!");
+                  } if(res.status === "fail" ){
+                    alert("This song is already in your playlist!");
+                }
                 })
                 .catch(err => console.log(err));
-                window.location.reload(false);
+                // window.location.reload(false);
         }
-
 
     }
 
@@ -108,30 +107,30 @@ class UserRec extends React.Component {
 
     }
 
-    userDislike = (userID, songID) => {
-        if (!window.localStorage.getItem("username")) {
-            alert("Please log in first!");
-            return;
-        }
-        else {
-            fetch(`http://localhost:3001/dislike/${userID}/${songID}`, {
-                method: 'GET'
-              })
-                .then(res => res.json())
-                .then(res => {
-                  //res is {status: "success"} if server -> db is sucessful
-                  if (res.status === "success") {
-                    alert("Sorry you don't like it!");
-                  } else {
-                    alert("Error!");
-                  }
-                })
-                .catch(err => console.log(err));
-                console.log(songID);
-                window.location.reload(false);
-        }
+    // userDislike = (userID, songID) => {
+    //     if (!window.localStorage.getItem("username")) {
+    //         alert("Please log in first!");
+    //         return;
+    //     }
+    //     else {
+    //         fetch(`http://localhost:3001/dislike/${userID}/${songID}`, {
+    //             method: 'GET'
+    //           })
+    //             .then(res => res.json())
+    //             .then(res => {
+    //               //res is {status: "success"} if server -> db is sucessful
+    //               if (res.status === "success") {
+    //                 alert("Sorry you don't like it!");
+    //               } else {
+    //                 alert("Error!");
+    //               }
+    //             })
+    //             .catch(err => console.log(err));
+    //             console.log(songID);
+    //             window.location.reload(false);
+    //     }
 
-    }
+    // }
     
 
     
@@ -156,7 +155,7 @@ class UserRec extends React.Component {
                             <div className="row gy-3">
                                 {
                                    this.state.songList.slice((this.state.page - 1)*10, (this.state.page - 1)*10 + 10).map((item) =>(
-                                        <div className="col-12" key={item.id}>
+                                        <div className="col-12" key={item.Song_ID}>
                                             <div className="activity-item">
                                                 <div
                                                     className="lab-inner d-flex flex-row-reverse align-items-center p-3 p-md-4">

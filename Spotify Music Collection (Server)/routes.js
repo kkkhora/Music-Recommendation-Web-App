@@ -460,56 +460,56 @@ async function playlist(req, res) {
 }
 
 //frontend: if playlist is not null, use userRec_features and userRec_year; if playlist is null {[]}, use userRec_random.
-async function userRec_features(req, res) {
-    connection.query(`WITH User_features AS
-        （SELECT AVG(acousticness) AS avg_acoustic, AVG(valence) AS avg_valence, AVG(Danceability) AS avg_dance, AVG(Energy) AS avg_energy, AVG(Instrumentalness) AS avg_instrument, AVG(Tempo) AS avg_tempo
-        FROM User_likes U JOIN Song_info S ON U.Song_ID = S.Song_ID
-        WHERE username = '%${req.query.user}%'）
-        SELECT D.Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
-        FROM Display_results D JOIN Song_info S ON D.Song_ID = S.Song_ID, User_features U
-        WHERE acousticness >= avg_acoustic - 0.1 AND acousticness <= avg_acoustic + 0.1 AND 
-        valence >= avg_valence - 0.1 AND valence <= avg_valence + 0.1 AND
-        Danceability >= avg_dance - 0.1 AND Danceability <= avg_dance + 0.1 AND
-        Energy >= avg_energy - 0.1 AND Energy <= avg_energy + 0.1 AND
-        Instrumentalness >= avg_instrumental - 0.1 AND Instrumentalness <= avg_instrumental + 0.1 AND
-        Tempo >= avg_tempo - 0.1 AND Tempo <= avg_Tempo
-        AND D.Song_ID NOT IN (SELECT Song_ID FROM User_likes)
-        ORDER BY RAND()
-        LIMIT 5
-        `, function (error, results, field) {
-        if (error) {
-            console.log(error)
-            res.json({ error: error })
-        } else if (results) {
-            res.json({ results: results })
-        }
-    });
-}
+// async function userRec_features(req, res) {
+//     connection.query(`WITH User_features AS
+//         （SELECT AVG(acousticness) AS avg_acoustic, AVG(valence) AS avg_valence, AVG(Danceability) AS avg_dance, AVG(Energy) AS avg_energy, AVG(Instrumentalness) AS avg_instrument, AVG(Tempo) AS avg_tempo
+//         FROM User_likes U JOIN Song_info S ON U.Song_ID = S.Song_ID
+//         WHERE username = '%${req.query.user}%'）
+//         SELECT D.Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
+//         FROM Display_results D JOIN Song_info S ON D.Song_ID = S.Song_ID, User_features U
+//         WHERE acousticness >= avg_acoustic - 0.1 AND acousticness <= avg_acoustic + 0.1 AND 
+//         valence >= avg_valence - 0.1 AND valence <= avg_valence + 0.1 AND
+//         Danceability >= avg_dance - 0.1 AND Danceability <= avg_dance + 0.1 AND
+//         Energy >= avg_energy - 0.1 AND Energy <= avg_energy + 0.1 AND
+//         Instrumentalness >= avg_instrumental - 0.1 AND Instrumentalness <= avg_instrumental + 0.1 AND
+//         Tempo >= avg_tempo - 0.1 AND Tempo <= avg_Tempo
+//         AND D.Song_ID NOT IN (SELECT Song_ID FROM User_likes)
+//         ORDER BY RAND()
+//         LIMIT 5
+//         `, function (error, results, field) {
+//         if (error) {
+//             console.log(error)
+//             res.json({ error: error })
+//         } else if (results) {
+//             res.json({ results: results })
+//         }
+//     });
+// }
 
 //frontend: if playlist is not null, use userRec_features and userRec_year; if playlist is null {[]}, use userRec_random.
-async function userRec_year(req, res) {
-    connection.query(`WITH User_year AS
-    （SELECT Album_year, Count(Album_year) AS num
-    FROM User_likes U JOIN Display_results D ON U.Song_ID = D.Song_ID
-    WHERE username = '%${req.query.user}%'
-    GROUP BY Album_year
-    ORDER BY num DESC
-    LIMIT 1）
-    SELECT D.Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
-    FROM Display_results D, User_year U
-    WHERE D.Album_year >= U.Album_year - 5 AND D.Album_year <= U.Album_year + 5
-    AND D.Song_ID NOT IN (SELECT Song_ID FROM User_likes)
-    ORDER BY RAND()
-    LIMIT 5
-    `, function (error, results, field) {
-        if (error) {
-            console.log(error)
-            res.json({ error: error })
-        } else if (results) {
-            res.json({ results: results })
-        }
-    });
-}
+// async function userRec_year(req, res) {
+//     connection.query(`WITH User_year AS
+//     （SELECT Album_year, Count(Album_year) AS num
+//     FROM User_likes U JOIN Display_results D ON U.Song_ID = D.Song_ID
+//     WHERE username = '%${req.query.user}%'
+//     GROUP BY Album_year
+//     ORDER BY num DESC
+//     LIMIT 1）
+//     SELECT D.Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
+//     FROM Display_results D, User_year U
+//     WHERE D.Album_year >= U.Album_year - 5 AND D.Album_year <= U.Album_year + 5
+//     AND D.Song_ID NOT IN (SELECT Song_ID FROM User_likes)
+//     ORDER BY RAND()
+//     LIMIT 5
+//     `, function (error, results, field) {
+//         if (error) {
+//             console.log(error)
+//             res.json({ error: error })
+//         } else if (results) {
+//             res.json({ results: results })
+//         }
+//     });
+// }
 
 async function user_like(req, res) {
     var username = req.params.username;
@@ -642,21 +642,21 @@ async function getPlayList(req, res) {
 
 
 //frontend: if playlist is not null, use userRec_features and userRec_year; if playlist is null {[]}, use userRec_random.
-async function userRec_random(req, res) {
-    connection.query(`
-    SELECT Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
-    FROM Display_results
-    ORDER BY RAND()
-    LIMIT 5
-    `, function (error, results, field) {
-        if (error) {
-            console.log(error)
-            res.json({ error: error })
-        } else if (results) {
-            res.json({ results: results })
-        }
-    });
-}
+// async function userRec_random(req, res) {
+//     connection.query(`
+//     SELECT Song_ID, Song_name, Artist_name, Album_year, Song_genre, Track_image
+//     FROM Display_results
+//     ORDER BY RAND()
+//     LIMIT 5
+//     `, function (error, results, field) {
+//         if (error) {
+//             console.log(error)
+//             res.json({ error: error })
+//         } else if (results) {
+//             res.json({ results: results })
+//         }
+//     });
+// }
 
 module.exports = {
     // validateUserInfo,
@@ -669,9 +669,9 @@ module.exports = {
     search_song,
     search_genre,
     playlist,
-    userRec_features,
-    userRec_year,
-    userRec_random,
+    //userRec_features,
+    //userRec_year,
+    //userRec_random,
     userRec_song,
     user_like,
     remove_like,

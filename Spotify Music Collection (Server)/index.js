@@ -30,8 +30,8 @@ app.get('/search/genre',routes.search_genre)
 //display
 app.get('/playlist', routes.getPlayList)
 //display
-app.get('/userRec/features',routes.userRec_features)//if no user data, random
-app.get('/userRec/country',routes.userRec_year)//if no user data, random
+//app.get('/userRec/features',routes.userRec_features)//if no user data, random
+//app.get('/userRec/country',routes.userRec_year)//if no user data, random
 //app,get('/userRec/year',routes.userRec_random)//if no user data, random
 app.get('/userRec/song', routes.userRec_song)//if no user data, random
 

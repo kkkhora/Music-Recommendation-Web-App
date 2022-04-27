@@ -12,8 +12,19 @@ const BannerTwo = () => {
                                     <span className="gradient-text-pink"> Songs</span>
                                 </h1>
                                 <p className="mb-5">You can browse your favourite songs by song name, year, genre and artist name.</p>
-                
                             </div>
+
+
+
+                    <div className="breadcrumb">
+                    <li >
+                    <Link href="/">
+                    <a style={{color: '#ebf0ff', fontWeight: 'bold', fontSize: '18px'}}>← Back to Home</a>
+                    </Link> 
+                    </li>
+                    </div>
+ 
+
                         </div>
                         <div className="col-lg-3">
                             <div className="banner-image">

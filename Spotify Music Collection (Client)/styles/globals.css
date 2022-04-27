@@ -551,6 +551,10 @@ ol {
   font-weight: 700;
 }
 
+.variation-items, .explore-section .section-header, .seller-section .seller-wrapper, .page-header-section.style-1 .page-header-content .page-header-inner .breadcrumb, .header__search button, .widget.widget-tags ul.widget-wrapper, .explore-category .excat-item a, .paginations ul li a, .wallet-tab {
+  justify-content: center;
+}
+
  .page-header-section.style-1 .page-header-content .page-header-inner .breadcrumb li.active {
   font-weight: 400;
 }

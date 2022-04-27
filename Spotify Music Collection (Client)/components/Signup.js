@@ -16,7 +16,10 @@ const Signup = () => {
             confirmPassword: confirmPassword.current.value
         }).then(response => {
             console.log(response);
-            if(response.data.status == 'success' ){
+            if(confirmPassword.current.value !== password.current.value){
+                alert("Your password doesn't match. Please comfirm your password.")
+            }
+            else if(response.data.status == 'success' ){
                 alert("Account created. Log in now.");
                 window.location = '/signin'
             }

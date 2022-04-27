@@ -14,6 +14,13 @@ const BannerTwo = () => {
                                 <p className="mb-5">You can browse your favourite songs by emotional tendency values.</p>
                 
                             </div>
+                            <div className="breadcrumb">
+                    <li >
+                    <Link href="/">
+                    <a style={{color: '#ebf0ff', fontWeight: 'bold', fontSize: '18px'}}>← Back to Home</a>
+                    </Link> 
+                    </li>
+                    </div>
                         </div>
                         <div className="col-lg-3">
                             <div className="banner-image">

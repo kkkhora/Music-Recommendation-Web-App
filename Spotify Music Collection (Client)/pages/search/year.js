@@ -139,7 +139,15 @@ const song = () => {
                                                 </div>
                                             </td>
                                             <td className="rank-owner" style={{ width: 100 }}>{item.Album_year}</td>
-                                            <td className="rank-assets" style={{ width: 100 }}>{item.Song_genre}</td>
+                                            <td className="rank-owner">
+                                                <div className="rank-vol-content" style={{
+                                                    width: 180, 'white-space': 'nowrap',
+                                                    overflow: 'hidden',
+                                                    'text-overflow': 'ellipsis'
+                                                }}>
+                                                    {item.Song_genre}
+                                                </div>
+                                            </td>
                                             <td className="rank-assets">
                                                     <img src="http://localhost:3000/assets/images/logo/likes-button.png"id = 'button' onClick = {() => userLike(window.localStorage.getItem("username"), String(item.Song_ID))} alt="Likes" />
                                                </td>

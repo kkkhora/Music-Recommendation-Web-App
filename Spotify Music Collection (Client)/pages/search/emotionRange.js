@@ -140,7 +140,7 @@ const SearchResult = () => {
                                             <td className="rank-owner" style={{ width: 100 }}>{`${item.Album_year}`}</td>
                                             <td className="rank-owner">
                                                 <div className="rank-vol-content" style={{
-                                                    width: 200, 'white-space': 'nowrap',
+                                                    width: 180, 'white-space': 'nowrap',
                                                     overflow: 'hidden',
                                                     'text-overflow': 'ellipsis'
                                                 }}>

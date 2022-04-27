@@ -23,11 +23,6 @@ const handleChangeVal = (e,field) => {
             <div className="section-header">
                 <h3 className="header-title">Browse By Song Name or Artist Name</h3>
                 <div className="header-content">
-                <Link href="/indextwo">
-                    <a
-                        className="default-btn style-2 small-btn move-right"><span>Refresh
-                            <i className="icofont-circled-right"></i></span></a>
-                    </Link> 
                 </div>
             </div>
             <div className="section-wrapper">

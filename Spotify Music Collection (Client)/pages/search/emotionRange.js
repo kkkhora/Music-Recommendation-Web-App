@@ -80,7 +80,7 @@ const SearchResult = () => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/indextwo">
+                                    <Link href="/indexthree">
                                         <a>Emotional Range</a>
                                     </Link>
                                 </li>

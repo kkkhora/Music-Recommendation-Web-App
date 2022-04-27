@@ -31,3 +31,10 @@ CREATE TABLE Artist_original(
     Artist_country      varchar(4),
     PRIMARY KEY (Song_ID)
 );
+
+create table Song_Classifier
+(
+    Song_ID             varchar(100)   not null
+        primary key,
+    Label               int null
+);

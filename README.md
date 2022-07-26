@@ -2,6 +2,12 @@
 CLICK THE FOLLOWING LINK TO SEE THE DEMO VIDEO OF THIS APP!
 https://drive.google.com/file/d/1HxWZo6unKJc66SyYFCjPTMGUNqQR8s57/view?usp=sharing
 
+CLICK THE FOLLOWING LINK TO SEE A PPT PRESENTATION OF THIS APP!
+https://drive.google.com/file/d/1yHIJE9Ay-JaLsJ5VmjUMlCMeTZdFOG6b/view?usp=sharing
+
+CLICK THE FOLLOWING LINK TO SEE THE PROJECT REPORT!
+https://drive.google.com/file/d/1f1WsWB_w5anIvZ_dw0RbG-LP3YAYxjL6/view?usp=sharing
+
 ## File List and Description
 
 | File Name | Description |

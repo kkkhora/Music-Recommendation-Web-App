@@ -1,7 +1,6 @@
 
-CLICK THE BELOW LINK TO SEE THE DEMO VIDEO OF THIS APP!
-
-https://drive.google.com/drive/my-drive
+CLICK THE FOLLOWING LINK TO SEE THE DEMO VIDEO OF THIS APP!
+https://drive.google.com/file/d/1HxWZo6unKJc66SyYFCjPTMGUNqQR8s57/view?usp=sharing
 
 ## File List and Description
 

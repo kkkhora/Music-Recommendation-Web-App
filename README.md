@@ -1,6 +1,4 @@
-# CIS550-22Spring-GroupProject
 
-This is a private repository for group project of CIS 550 in 2022 Spring.
 
 ## File List and Description
 

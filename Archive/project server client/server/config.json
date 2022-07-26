@@ -1,9 +1,0 @@
-{
-    "rds_host": "aws-rds-mysql-1.cbfipmkivdxm.us-east-1.rds.amazonaws.com",
-    "rds_port": "3306",
-    "rds_user": "admin",
-    "rds_password" : "Group550-project",
-    "rds_db": "Songs_artist",
-    "server_host": "127.0.0.1",
-    "server_port":"8080"
-}
